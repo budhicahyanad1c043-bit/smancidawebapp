@@ -23,7 +23,7 @@
             color: #fff;
         }
 
-        /* Garis Konstruksi Kuning Hitam di Atas & Bawah */
+        /* Garis Konstruksi Kuning Hitam */
         .hazard-bar {
             width: 100%;
             height: 15px;
@@ -40,7 +40,7 @@
         .construction-zone {
             position: relative;
             width: 100%;
-            height: 70vh;
+            height: 65vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -58,7 +58,6 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
-        /* Batang Baja Struktur Gantry */
         .crane-bridge::before {
             content: '';
             position: absolute;
@@ -75,11 +74,11 @@
             );
         }
 
-        /* Trolley / Derek yang bergeser ke kanan dan kiri */
+        /* Trolley / Derek */
         .trolley {
             position: absolute;
             top: 15px;
-            left: 10%;
+            left: 50%;
             width: 80px;
             height: 30px;
             background: #333;
@@ -94,7 +93,7 @@
             top: 28px;
             left: 50%;
             width: 2px;
-            height: 180px;
+            height: 150px; /* Dikurangi sedikit agar proporsional di layar pendek */
             background: #888;
             transform: translateX(-50%);
             animation: adjustCable 8s ease-in-out infinite alternate;
@@ -116,9 +115,10 @@
         /* Wadah Beban / Kontainer Teks */
         .load {
             position: absolute;
-            top: 210px;
-            left: calc(10% - 160px); /* Sinkron dengan posisi awal trolley + offset setengah lebar load */
-            width: 400px;
+            top: 180px;
+            left: 50%;
+            width: 90%; /* Menggunakan persentase agar responsif */
+            max-width: 400px; /* Batas maksimal di layar besar */
             padding: 20px;
             background: #222;
             border: 4px dashed #ffcc00;
@@ -129,16 +129,16 @@
         }
 
         .load h1 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             color: #ffcc00;
             margin-bottom: 5px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .load p {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #aaa;
         }
 
@@ -146,46 +146,101 @@
         .info-text {
             text-align: center;
             margin-bottom: 40px;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
         .info-text p {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #ccc;
             max-width: 500px;
             line-height: 1.6;
         }
 
-        /* === ANIMASI KEYFRAMES === */
-        
-        /* Menggerakkan Derek Horisontal */
+        /* === ANIMASI DEFAULT (DESKTOP & TABLET LEBAR) === */
         @keyframes moveTrolley {
-            0% { left: 15%; }
-            50% { left: 75%; }
-            100% { left: 45%; }
+            0% { transform: translateX(-150px); }
+            50% { transform: translateX(150px); }
+            100% { transform: translateX(0px); }
         }
 
-        /* Menggerakkan Beban Mengikuti Derek + Efek Ayunan Halus */
         @keyframes moveLoad {
-            0% { 
-                left: calc(15% - 160px); 
-                transform: rotate(1deg);
+            0% { transform: translateX(-50%) translateX(-150px) rotate(1deg); }
+            50% { transform: translateX(-50%) translateX(150px) rotate(-1deg); }
+            100% { transform: translateX(-50%) translateX(0px) rotate(0deg); }
+        }
+
+        @keyframes adjustCable {
+            0% { transform: translateX(-50%) rotate(0.8deg); }
+            50% { transform: translateX(-50%) rotate(-0.8deg); }
+            100% { transform: translateX(-50%) rotate(0deg); }
+        }
+
+        /* === MEDIA QUERY: TABLET (Maksimal Lebar 768px) === */
+        @media (max-width: 768px) {
+            .load h1 {
+                font-size: 1.4rem;
             }
-            50% { 
-                left: calc(75% - 160px); 
-                transform: rotate(-1deg);
+            
+            /* Jangkauan geser crane dikurangi agar tidak keluar layar tablet */
+            @keyframes moveTrolley {
+                0% { transform: translateX(-100px); }
+                50% { transform: translateX(100px); }
+                100% { transform: translateX(0px); }
             }
-            100% { 
-                left: calc(45% - 160px); 
-                transform: rotate(0deg);
+
+            @keyframes moveLoad {
+                0% { transform: translateX(-50%) translateX(-100px) rotate(1deg); }
+                50% { transform: translateX(-50%) translateX(100px) rotate(-1deg); }
+                100% { transform: translateX(-50%) translateX(0px) rotate(0deg); }
             }
         }
 
-        /* Menjaga Kabel Tetap Selaras dan Sedikit Berayun */
-        @keyframes adjustCable {
-            0% { transform: translateX(-50%) rotate(0.5deg); }
-            50% { transform: translateX(-50%) rotate(-0.5deg); }
-            100% { transform: translateX(-50%) rotate(0deg); }
+        /* === MEDIA QUERY: HANDPHONE (Maksimal Lebar 480px) === */
+        @media (max-width: 480px) {
+            .crane-bridge {
+                top: 25px;
+            }
+            
+            .trolley {
+                top: 0px;
+                width: 65px;
+                height: 25px;
+            }
+
+            .cable {
+                height: 120px;
+            }
+
+            .load {
+                top: 135px;
+                padding: 15px 10px;
+            }
+
+            .load h1 {
+                font-size: 1.2rem;
+                letter-spacing: 0px;
+            }
+
+            .load p {
+                font-size: 0.85rem;
+            }
+
+            .info-text p {
+                font-size: 0.9rem;
+            }
+
+            /* Jangkauan geser crane diminimalkan khusus untuk layar hp yang sempit */
+            @keyframes moveTrolley {
+                0% { transform: translateX(-40px); }
+                50% { transform: translateX(40px); }
+                100% { transform: translateX(0px); }
+            }
+
+            @keyframes moveLoad {
+                0% { transform: translateX(-50%) translateX(-40px) rotate(1.5deg); }
+                50% { transform: translateX(-50%) translateX(40px) rotate(-1.5deg); }
+                100% { transform: translateX(-50%) translateX(0px) rotate(0deg); }
+            }
         }
     </style>
 </head>
@@ -199,17 +254,17 @@
         <!-- Jembatan Crane -->
         <div class="crane-bridge"></div>
         
-        <!-- Trolley & Kabel yang bergerak -->
+        <!-- Trolley & Kabel -->
         <div class="trolley">
             <div class="cable">
                 <div class="hook"></div>
             </div>
         </div>
 
-        <!-- Beban Teks yang Diangkat -->
+        <!-- Teks Under Construction -->
         <div class="load">
             <h1>Under Construction!</h1>
-            <p>We are building something awesome.</p>
+            <p>This website is under construction.</p>
         </div>
     </div>
 

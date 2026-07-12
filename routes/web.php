@@ -20,14 +20,13 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Rute yang WAJIB Login (Multiuser)
-Route::middleware(['auth'])->prefix('dashboard')->group(function () {
+Route::middleware(['auth'])->group(function () {
     
     // Halaman Dasbor Utama (Bisa diakses Admin & Web-Journalist)
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.users.usr');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Rute Pengelolaan User & Setting Website
     Route::get('/dashboard/users', [DashboardController::class, 'users'])->name('dashboard.users.main');
-    
     // Pindahkan rute setting ke SettingController baru Anda di sini:
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('settings', [SettingController::class, 'update'])->name('settings.update');

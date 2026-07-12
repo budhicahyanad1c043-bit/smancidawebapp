@@ -37,7 +37,7 @@
                     <div class="p-6 flex flex-col items-center">
                         <div class="h-28 w-28 bg-slate-50 border border-dashed border-slate-300 rounded-lg flex items-center justify-center p-2 mb-4 overflow-hidden">
                             @if($setting->logo ?? false)
-                                <img src="{{ asset($setting->logo) }}" class="h-full w-full object-contain">
+                                <img src="{{ Storage::url($setting->logo) }}" class="h-full w-full object-contain">
                             @else
                                 <span class="text-4xl">🏫</span>
                             @endif
@@ -54,7 +54,7 @@
                     <div class="p-6 flex flex-col items-center">
                         <div class="h-36 w-28 bg-slate-50 border border-dashed border-slate-300 rounded-lg flex items-center justify-center mb-4 overflow-hidden shadow-inner">
                             @if($setting->principal_photo ?? false)
-                                <img src="{{ asset($setting->principal_photo) }}" class="h-full w-full object-cover">
+                                <img src="{{ Storage::url($setting->principal_photo) }}" class="h-full w-full object-cover">
                             @else
                                 <span class="text-4xl">👤</span>
                             @endif

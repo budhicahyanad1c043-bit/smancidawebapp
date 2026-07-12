@@ -13,7 +13,7 @@
         <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center gap-4">
             <!-- Tempatkan berkas logo smancida.jpg di folder public/images/ -->
             @if($setting && $setting->logo)
-                <img src="{{ asset($setting->logo) }}" alt="Logo" class="h-20 w-auto object-contain">
+                <img src="{{ Storage::url($setting->logo) }}" alt="Logo" class="h-20 w-auto object-contain">
             @else
                 <span class="text-2xl">🏫</span>
             @endif

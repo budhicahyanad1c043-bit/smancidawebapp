@@ -21,7 +21,7 @@
             <div class="h-20 w-20 bg-white border border-slate-200 rounded-2xl flex items-center justify-center p-2 mx-auto shadow-sm overflow-hidden mb-3">
                 @if($setting && $setting->logo)
                     <!-- Jika data setting ada dan kolom logo terisi, panggil filenya -->
-                    <img src="{{ asset($setting->logo) }}" alt="Logo Sekolah" class="h-full w-full object-contain">
+                    <img src="{{ Storage::url($setting->logo) }}" alt="Logo Sekolah" class="h-full w-full object-contain">
                 @else
                     <!-- Jika kosong/null, tampilkan logo cadangan berupa aset statis atau emoji -->
                     <span class="text-4xl">🏫</span>

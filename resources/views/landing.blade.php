@@ -51,7 +51,7 @@
                 <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 shadow-inner text-center">
                     <div class="w-24 h-24 bg-slate-300 rounded-full mx-auto mb-4 flex items-center justify-center text-slate-500 text-2xl font-bold">
                         @if($setting && $setting->principal_photo)
-                            <img src="{{ asset($setting->principal_photo) }}" alt="Kepala Sekolah" class="rounded-xl shadow-lg h-20 object-cover">
+                            <img src="{{ Storage::url($setting->principal_photo) }}" alt="Kepala Sekolah" class="rounded-xl shadow-lg h-20 object-cover">
                         @else
                             <div class="h-20 bg-slate-200 rounded-xl flex items-center justify-center text-4xl">👤</div>
                         @endif</div>

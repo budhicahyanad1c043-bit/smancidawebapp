@@ -21,20 +21,21 @@
         </div>
     </header>
 
-    <!-- NAVIGATION BAR -->
+    <!-- NAVIGATION BAR (Tetap di atas pada semua ukuran layar) -->
     <nav class="sticky top-0 z-50 bg-blue-700 text-white shadow-md">
-        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-14">
+        <!-- Tambahkan kelas 'overflow-x-auto' agar menu di HP bisa digeser ke samping jika layarnya kekecilan -->
+        <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-14 overflow-x-auto whitespace-nowrap scrollbar-none">
             <!-- Menu Utama -->
             <div class="flex items-center space-x-1 text-sm font-medium">
-                <a href="#" class="px-4 py-2 rounded-lg bg-blue-800 text-white transition">Home</a>
-                <a href="#profil" class="px-4 py-2 rounded-lg hover:bg-blue-600 transition text-blue-50">Profil</a>
-                <a href="#akademis" class="px-4 py-2 rounded-lg hover:bg-blue-600 transition text-blue-50">Akademis</a>
-                <a href="#ekstrakurikuler" class="px-4 py-2 rounded-lg hover:bg-blue-600 transition text-blue-50">Ekstrakurikuler</a>
-                <a href="#tentang-kami" class="px-4 py-2 rounded-lg hover:bg-blue-600 transition text-blue-50">Tentang Kami</a>
+                <a href="#" class="px-3 py-1.5 rounded-lg bg-blue-800 text-white transition">Home</a>
+                <a href="#profil" class="px-3 py-1.5 rounded-lg hover:bg-blue-600 transition text-blue-50">Profil</a>
+                <a href="#akademis" class="px-3 py-1.5 rounded-lg hover:bg-blue-600 transition text-blue-50">Akademis</a>
+                <a href="#ekstrakurikuler" class="px-3 py-1.5 rounded-lg hover:bg-blue-600 transition text-blue-50">Ekstrakurikuler</a>
+                <a href="#tentang-kami" class="px-3 py-1.5 rounded-lg hover:bg-blue-600 transition text-blue-50">Tentang Kami</a>
             </div>
             
             <!-- Link Akses Cepat / Portal -->
-            <div class="hidden md:block">
+            <div class="hidden md:block ml-4">
                 <a href="#" class="bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs font-bold px-4 py-2 rounded shadow-sm uppercase tracking-wider transition">
                     PPDB 2026
                 </a>

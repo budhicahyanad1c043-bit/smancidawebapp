@@ -23,7 +23,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     
     // Halaman Dasbor Utama (Bisa diakses Admin & Web-Journalist)
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Rute Pengelolaan User & Setting Website
     Route::get('/dashboard/users', [DashboardController::class, 'users'])->name('users.index');

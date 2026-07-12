@@ -17,9 +17,13 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Memanggil seeder Admin yang sudah kita buat sebelumnya
+        $this->call(AdminSeeder::class);
+
+        \App\Models\Setting::create([
+            'school_name' => 'SMAN 1 Cidahu',
+            'logo' => 'images/logo.png', 
+            'principal_name' => 'Nama Kepala Sekolah, M.Pd.',
         ]);
     }
 }

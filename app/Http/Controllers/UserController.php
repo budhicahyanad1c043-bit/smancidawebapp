@@ -23,22 +23,21 @@ class UserController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'name'     => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users,username',
-            'email'    => 'required|string|email|max:255|unique:users,email',
-            'password' => 'required|string|min:8',
-            'role'     => 'required|in:admin,web-journalist',
-        ]);
+{
+    // 1. Simpan hasil validasi ke dalam variabel
+    $validated = $request->validate([
+        'name'     => 'required|string|max:255',
+        'username' => 'required|string|max:255|unique:users,username', // Tanpa spasi setelah koma
+        'email'    => 'required|string|email|max:255|unique:users,email',    // Tanpa spasi setelah koma
+        'password' => 'required|string|min:8',
+        'role'     => 'required|in:admin,web-journalist',
+    ]);
 
-        User::create([
-            'name'     => $request->name,
-            'username' => $request->username,
-            'email'    => $request->email,
-            'password' => Hash::make($request->password),
-            'role'     => $request->role,
-        ]);
+        // 2. Timpa password yang belum di-hash dengan yang sudah di-hash
+        $validated['password'] = Hash::make($validated['password']);
+
+        // 3. Masukkan langsung semua data yang sudah valid
+        User::create($validated);
 
         return back()->with('success', 'Pengguna baru berhasil ditambahkan.');
     }

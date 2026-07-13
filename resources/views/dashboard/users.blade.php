@@ -21,6 +21,12 @@
             Dashboard &nbsp;/&nbsp; <span class="text-slate-600 font-semibold">Users</span>
         </div>
     </div>
+    @if(session('success'))
+        <div class="bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs p-4 rounded-lg flex items-center space-x-2 shadow-sm">
+            <span>✅</span>
+            <span class="font-semibold">{{ session('success') }}</span>
+        </div>
+    @endif
 
     <!-- Card Tabel Utama -->
     <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden w-full max-w-full min-w-0">
@@ -168,7 +174,7 @@
                 <div>
                     <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Hak Akses / Role</label>
                     <select name="role" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:border-blue-500 outline-none bg-white">
-                        <option value="jurnalis">Jurnalis</option>
+                        <option value="web-journalist">Jurnalis</option>
                         <option value="admin">Admin</option>
                     </select>
                 </div>
@@ -206,7 +212,7 @@
                 <div>
                     <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Hak Akses / Role</label>
                     <select name="role" x-model="editData.role" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:border-blue-500 outline-none bg-white">
-                        <option value="jurnalis">Jurnalis</option>
+                        <option value="web-journalist">Jurnalis</option>
                         <option value="admin">Admin</option>
                     </select>
                 </div>

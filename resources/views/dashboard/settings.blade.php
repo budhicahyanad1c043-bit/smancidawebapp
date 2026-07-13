@@ -10,7 +10,7 @@
             <h1 class="text-2xl font-bold text-slate-800">Pengaturan Website</h1>
             <p class="text-xs text-slate-500 mt-0.5">Kelola informasi instansi profil utama SMAN 1 Cidahu</p>
         </div>
-        <div class="text-xs text-slate-400 font-medium">
+        <div class="text-xs text-right text-slate-400 font-medium">
             Dashboard &nbsp;/&nbsp; <span class="text-slate-600 font-semibold">Settings</span>
         </div>
     </div>

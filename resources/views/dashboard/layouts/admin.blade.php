@@ -39,7 +39,7 @@
                     </svg>
                 @endif
                 <span x-show="!sidebarCollapsed" class="font-bold text-sm tracking-wider text-white truncate">
-                    {{ $setting ? strtoupper(explode(' ', $setting->school_name)[0]) : 'CIDAHU' }}
+                    {{ $setting->school_name ?? 'SMAN 1 Cidahu' }}
                 </span>
             </div>
 
@@ -49,7 +49,7 @@
                     <p x-show="!sidebarCollapsed" class="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2">Menu Utama</p>
                     <a href="{{ url('/dashboard') }}" class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ Request::is('dashboard') && !Request::is('dashboard/users*') && !Request::is('dashboard/settings*') ? 'bg-blue-600 text-white font-bold' : 'hover:bg-slate-800 hover:text-white' }}" :class="sidebarCollapsed ? 'md:justify-center' : ''">
                         <svg class="w-4 h-4 flex-shrink-0" :class="sidebarCollapsed ? 'md:mr-0' : 'mr-3'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"></path></svg>
-                        <span x-show="!sidebarCollapsed">Beranda Dashboard</span>
+                        <span x-show="!sidebarCollapsed">Dashboard</span>
                     </a>
                 </div>
                 <div>

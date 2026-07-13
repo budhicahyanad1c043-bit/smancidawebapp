@@ -17,6 +17,9 @@
             <h1 class="text-xl font-black text-slate-800 tracking-tight">Pengelolaan Pengguna</h1>
             <p class="text-xs text-slate-500">Manajemen hak akses admin dan jurnalis sistem informasi sekolah.</p>
         </div>
+        <div class="text-xs text-right text-slate-400 font-medium">
+            Dashboard &nbsp;/&nbsp; <span class="text-slate-600 font-semibold">Users</span>
+        </div>
     </div>
 
     <!-- Card Tabel Utama -->

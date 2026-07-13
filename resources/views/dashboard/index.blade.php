@@ -10,7 +10,7 @@
             <h1 class="text-2xl font-semibold text-slate-800">Dashboard</h1>
             <p class="text-xs text-slate-500 mt-0.5">Halaman kontrol utama SIM SMAN 1 Cidahu</p>
         </div>
-        <div class="text-xs text-slate-400 font-medium">
+        <div class="text-xs text-right text-slate-400 font-medium p-4">
             Home &nbsp;/&nbsp; <span class="text-slate-600 font-semibold">Dashboard</span>
         </div>
     </div>

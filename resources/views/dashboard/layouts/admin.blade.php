@@ -14,9 +14,10 @@
 
     <!-- PEMBUNGKUS UTAMA (Semua Variabel Didandani di Sini) -->
     <div x-data="{ 
-        sidebarCollapsed: window.innerWidth < 768 ? true : false, 
+        sidebarCollapsed: window.innerWidth <= 768 ? false : true, 
+        sidebarCollapsed: window.innerWidth >= 768 ? true : false,
         openMobileSidebar: false 
-    }" @resize.window="if (window.innerWidth >= 768) openMobileSidebar = false" class="min-h-screen flex">
+        }" @resize.window="if (window.innerWidth >= 768) openMobileSidebar = false" class="flex-1 transition-all duration-300 min-h-screen flex flex-col min-w-0 max-w-full overflow-x-clip">
 
         <!-- 1. SIDEBAR NAVIGASI -->
         <aside class="fixed inset-y-0 left-0 z-40 bg-slate-900 text-slate-400 transition-all duration-300 flex flex-col shadow-xl md:translate-x-0"

@@ -89,8 +89,29 @@
         const file = event.target.files[0];
         const imagePreview = document.getElementById('imagePreview');
         const fallback = document.getElementById('avatarFallback');
+        const maxSize = 2 * 1024 * 1024; // 2MB
 
         if (file) {
+            // Validasi Ukuran File dengan SweetAlert2
+            if (file.size > maxSize) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ukuran file terlalu besar! Maksimal ukuran gambar adalah 2MB.',
+                    confirmButtonColor: '#2563eb', // Warna biru Tailwind (bg-blue-600)
+                    customClass: {
+                        popup: 'rounded-xl',
+                        confirmButton: 'rounded-lg text-xs px-4 py-2 font-bold'
+                    }
+                });
+
+                this.value = ''; // Mengosongkan kembali input file
+                imagePreview.classList.add('hidden');
+                if (fallback) fallback.classList.remove('hidden');
+                return;
+            }
+
+            // Jika lolos validasi, tampilkan preview
             const reader = new FileReader();
             reader.onload = function(e) {
                 imagePreview.src = e.target.result;

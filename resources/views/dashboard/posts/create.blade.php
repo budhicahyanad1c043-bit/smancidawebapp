@@ -78,8 +78,28 @@
         const file = event.target.files[0];
         const previewContainer = document.getElementById('previewContainer');
         const imagePreview = document.getElementById('imagePreview');
+        const maxCoverSize = 2 * 1024 * 1024; // Batas Maksimal 2MB
 
         if (file) {
+            // Validasi Ukuran Gambar Sampul
+            if (file.size > maxCoverSize) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ukuran Gambar Terlalu Besar',
+                    text: 'Maksimal ukuran gambar sampul artikel adalah 2MB.',
+                    confirmButtonColor: '#2563eb',
+                    customClass: {
+                        popup: 'rounded-xl',
+                        confirmButton: 'rounded-lg text-xs px-4 py-2 font-bold'
+                    }
+                });
+
+                this.value = ''; // Mengosongkan kembali input file
+                previewContainer.classList.add('hidden');
+                return;
+            }
+
+            // Jika aman, tampilkan preview gambar sampul
             const reader = new FileReader();
             reader.onload = function(e) {
                 imagePreview.src = e.target.result;

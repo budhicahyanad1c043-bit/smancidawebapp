@@ -145,13 +145,37 @@
 
 @push('scripts')
 <script>
-    // --- 1. LOGIKA LIVE PREVIEW LOGO ---
+    const maxImageSize = 2 * 1024 * 1024; // Batas Maksimal 2MB
+
+    // Fungsi pembantu untuk menampilkan SweetAlert2 yang seragam
+    function showSizeAlert() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Ukuran File Terlalu Besar',
+            text: 'Maksimal ukuran gambar yang diizinkan adalah 2MB.',
+            confirmButtonColor: '#2563eb',
+            customClass: {
+                popup: 'rounded-xl',
+                confirmButton: 'rounded-lg text-xs px-4 py-2 font-bold'
+            }
+        });
+    }
+
+    // --- 1. LIVE PREVIEW LOGO ---
     document.getElementById('logoInput').addEventListener('change', function(event) {
         const file = event.target.files[0];
         const preview = document.getElementById('logoPreview');
         const fallback = document.getElementById('logoFallback');
 
         if (file) {
+            if (file.size > maxImageSize) {
+                showSizeAlert();
+                this.value = ''; // Reset input file
+                preview.classList.add('hidden');
+                if (fallback) fallback.classList.remove('hidden');
+                return;
+            }
+
             const reader = new FileReader();
             reader.onload = function(e) {
                 preview.src = e.target.result;
@@ -162,13 +186,21 @@
         }
     });
 
-    // --- 2. LOGIKA LIVE PREVIEW FOTO KEPALA SEKOLAH ---
+    // --- 2. LIVE PREVIEW FOTO KEPALA SEKOLAH ---
     document.getElementById('principalInput').addEventListener('change', function(event) {
         const file = event.target.files[0];
         const preview = document.getElementById('principalPreview');
         const fallback = document.getElementById('principalFallback');
 
         if (file) {
+            if (file.size > maxImageSize) {
+                showSizeAlert();
+                this.value = ''; // Reset input file
+                preview.classList.add('hidden');
+                if (fallback) fallback.classList.remove('hidden');
+                return;
+            }
+
             const reader = new FileReader();
             reader.onload = function(e) {
                 preview.src = e.target.result;

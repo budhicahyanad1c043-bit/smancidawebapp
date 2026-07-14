@@ -35,14 +35,19 @@
                         <h3 class="text-xs font-bold text-slate-600 uppercase tracking-wider">Logo Instansi</h3>
                     </div>
                     <div class="p-6 flex flex-col items-center">
-                        <div class="h-28 w-28 bg-slate-50 border border-dashed border-slate-300 rounded-lg flex items-center justify-center p-2 mb-4 overflow-hidden">
+                        <!-- Kontainer Logo -->
+                        <div class="h-28 w-28 bg-slate-50 border border-dashed border-slate-300 rounded-lg flex items-center justify-center p-2 mb-4 overflow-hidden relative shadow-inner">
                             @if($setting->logo ?? false)
-                                <img src="{{ Storage::url($setting->logo) }}" class="h-full w-full object-contain">
+                                <img id="logoPreview" src="{{ Storage::url($setting->logo) }}" class="h-full w-full object-contain">
                             @else
-                                <span class="text-4xl">🏫</span>
+                                <!-- Fallback ikon sekolah bawaan -->
+                                <span id="logoFallback" class="text-4xl">🏫</span>
+                                <img id="logoPreview" src="#" class="h-full w-full object-contain hidden">
                             @endif
                         </div>
-                        <input type="file" name="logo" class="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border file:border-slate-300 file:bg-slate-50 file:text-slate-700 hover:file:bg-slate-100 cursor-pointer">
+
+                        <!-- Input File Logo (Ditambahkan id="logoInput") -->
+                        <input type="file" name="logo" id="logoInput" accept="image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border file:border-slate-300 file:bg-slate-50 file:text-slate-700 hover:file:bg-slate-100 cursor-pointer">
                     </div>
                 </div>
 
@@ -52,15 +57,20 @@
                         <h3 class="text-xs font-bold text-slate-600 uppercase tracking-wider">Foto Kepala Sekolah</h3>
                     </div>
                     <div class="p-6 flex flex-col items-center">
-                        <div class="h-36 w-28 bg-slate-50 border border-dashed border-slate-300 rounded-lg flex items-center justify-center mb-4 overflow-hidden shadow-inner">
-                            @if($setting->principal_photo ?? false)
-                                <img src="{{ Storage::url($setting->principal_photo) }}" class="h-full w-full object-cover">
-                            @else
-                                <span class="text-4xl">👤</span>
-                            @endif
-                        </div>
-                        <input type="file" name="principal_photo" class="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border file:border-slate-300 file:bg-slate-50 file:text-slate-700 hover:file:bg-slate-100 cursor-pointer">
+                    <!-- Kontainer Foto -->
+                    <div class="h-36 w-28 bg-slate-50 border border-dashed border-slate-300 rounded-lg flex items-center justify-center mb-4 overflow-hidden shadow-inner relative">
+                        @if($setting->principal_photo ?? false)
+                            <img id="principalPreview" src="{{ Storage::url($setting->principal_photo) }}" class="h-full w-full object-cover">
+                        @else
+                            <!-- Fallback ikon avatar bawaan -->
+                            <span id="principalFallback" class="text-4xl">👤</span>
+                            <img id="principalPreview" src="#" class="h-full w-full object-cover hidden">
+                        @endif
                     </div>
+
+                    <!-- Input File (Ditambahkan id="principalInput") -->
+                    <input type="file" name="principal_photo" id="principalInput" accept="image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border file:border-slate-300 file:bg-slate-50 file:text-slate-700 hover:file:bg-slate-100 cursor-pointer">
+                </div>
                 </div>
             </div>
 
@@ -132,3 +142,41 @@
     </form>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    // --- 1. LOGIKA LIVE PREVIEW LOGO ---
+    document.getElementById('logoInput').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const preview = document.getElementById('logoPreview');
+        const fallback = document.getElementById('logoFallback');
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.classList.remove('hidden');
+                if (fallback) fallback.classList.add('hidden');
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // --- 2. LOGIKA LIVE PREVIEW FOTO KEPALA SEKOLAH ---
+    document.getElementById('principalInput').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const preview = document.getElementById('principalPreview');
+        const fallback = document.getElementById('principalFallback');
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.classList.remove('hidden');
+                if (fallback) fallback.classList.add('hidden');
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+@endpush

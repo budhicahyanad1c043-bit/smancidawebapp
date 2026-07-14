@@ -21,8 +21,14 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Gambar Sampul</label>
-                <input type="file" name="image" class="w-full px-3 py-1.5 border border-slate-200 rounded-lg text-xs text-slate-500 focus:outline-none file:mr-4 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[11px] file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200">
+                <input type="file" name="image" id="imageInput" accept="image/*" class="w-full px-3 py-1.5 border border-slate-200 rounded-lg text-xs text-slate-500 focus:outline-none file:mr-4 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[11px] file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200">
                 @error('image') <p class="text-rose-500 text-[11px] mt-1">{{ $message }}</p> @enderror
+
+                <!-- Area Preview Gambar -->
+                <div id="previewContainer" class="mt-3 hidden">
+                    <p class="text-[10px] text-slate-400 mb-1">Pratinjau Gambar:</p>
+                    <img id="imagePreview" src="#" class="max-h-40 rounded-lg border border-slate-200 object-cover">
+                </div>
             </div>
             
             <!-- TAMBAHKAN DROPDOWN PILIHAN KATEGORI INI -->
@@ -65,3 +71,24 @@
     </form>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    document.getElementById('imageInput').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const previewContainer = document.getElementById('previewContainer');
+        const imagePreview = document.getElementById('imagePreview');
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                previewContainer.classList.remove('hidden');
+            }
+            reader.readAsDataURL(file);
+        } else {
+            previewContainer.classList.add('hidden');
+        }
+    });
+</script>
+@endpush

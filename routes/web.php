@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Dashboard\PostController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Dashboard\ProfileController;
 
 // Route::get('/', function () {
 //     return view('landing');
@@ -45,5 +46,8 @@ Route::middleware(['auth'])->group(function () {
     // Rute bawaan resource mencakup index, create, store, edit, update, destroy
     Route::resource('posts', PostController::class);
     Route::resource('categories', CategoryController::class);
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     });
 });

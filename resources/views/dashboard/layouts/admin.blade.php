@@ -114,6 +114,19 @@
                         </a>
                     </div>
                 </div>
+                <div>
+                    <div class="space-y-1">
+                        <!-- Menu Profil User -->
+                        <a href="{{ route('profile.edit') }}" 
+                        class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ request()->routeIs('profile.*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}" 
+                        :class="sidebarCollapsed ? 'md:justify-center' : ''">
+                            <svg class="w-4 h-4 flex-shrink-0" :class="sidebarCollapsed ? 'md:mr-0' : 'mr-3'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                            </svg>
+                            <span x-show="!sidebarCollapsed">Profil User</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </aside>
 
@@ -148,9 +161,14 @@
                 <!-- Sisi Kanan: Dropdown Akun -->
                 <div x-data="{ openProfile: false }" class="relative">
                     <button @click="openProfile = !openProfile" @click.away="openProfile = false" class="flex items-center space-x-2 p-1 rounded-lg hover:bg-slate-50 transition">
-                        <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-xs shadow-sm">
-                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                        </div>
+                        @if(auth()->user()->avatar)
+                            <img src="{{ Storage::url(auth()->user()->avatar) }}" class="w-8 h-8 rounded-full object-cover border border-slate-200">
+                        @else
+                            <!-- Fallback: Mengambil huruf pertama dari nama user sebagai inisial -->
+                            <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold uppercase">
+                                {{ substr(auth()->user()->name, 0, 1) }}
+                            </div>
+                        @endif
                         <svg class="w-4 h-4 text-slate-400 transition-transform" :class="{'rotate-180': openProfile}" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
 
@@ -185,6 +203,6 @@
 
         </div>
     </div>
-
+@stack('scripts')
 </body>
 </html>

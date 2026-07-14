@@ -6,8 +6,28 @@
     <title>@yield('title') - {{ $setting->school_name ?? 'SMAN 1 Cidahu' }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
+    <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js" defer></script>
     <style>
         [x-cloak] { display: none !important; }
+        /* Menyesuaikan gaya Trix agar menyatu dengan tema Tailwind */
+        trix-toolbar .trix-button-group {
+            border: 1px solid #e2e8f0 !important;
+            background-color: #f8fafc;
+            border-radius: 0.375rem;
+        }
+        trix-editor {
+            min-height: 250px !important;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 0.5rem;
+            padding: 0.75rem !important;
+            font-size: 0.875rem;
+            color: #334155;
+        }
+        trix-editor:focus {
+            border-color: #3b82f6 !important;
+            outline: none;
+        }
     </style>
 </head>
 <body class="bg-slate-50 antialiased text-slate-800">
@@ -65,6 +85,32 @@
                         <a href="{{ route('settings.index') }}" class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ Request::is('settings*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}" :class="sidebarCollapsed ? 'md:justify-center' : ''">
                             <svg class="w-4 h-4 flex-shrink-0" :class="sidebarCollapsed ? 'md:mr-0' : 'mr-3'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                             <span x-show="!sidebarCollapsed">Pengaturan Web</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Kategori Baru: Konten Website -->
+                <div>
+                    <p x-show="!sidebarCollapsed" class="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2">Konten Publik</p>
+                    <div class="space-y-1">
+                        <!-- Menu Artikel / Berita -->
+                        <a href="{{ route('posts.index') }}" 
+                        class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ request()->routeIs('posts.*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}" 
+                        :class="sidebarCollapsed ? 'md:justify-center' : ''">
+                            <svg class="w-4 h-4 flex-shrink-0" :class="sidebarCollapsed ? 'md:mr-0' : 'mr-3'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                            </svg>
+                            <span x-show="!sidebarCollapsed">Artikel & Berita</span>
+                        </a>
+
+                        <!-- Menu Kategori Berita -->
+                        <a href="{{ route('categories.index') }}" 
+                        class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ request()->routeIs('categories.*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}" 
+                        :class="sidebarCollapsed ? 'md:justify-center' : ''">
+                            <svg class="w-4 h-4 flex-shrink-0" :class="sidebarCollapsed ? 'md:mr-0' : 'mr-3'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l6.499 6.499c.404.404.935.61 1.474.61z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 3.464l4.536 4.536a2.25 2.25 0 010 3.182l-6.499 6.499c-.404.404-.935.61-1.474.61" />
+                            </svg>
+                            <span x-show="!sidebarCollapsed">Kategori Berita</span>
                         </a>
                     </div>
                 </div>

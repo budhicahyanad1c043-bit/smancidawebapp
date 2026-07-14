@@ -6,10 +6,17 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Dashboard\PostController;
+use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('landing');
-});
+// Route::get('/', function () {
+//     return view('landing');
+// });
+
+// Rute Halaman Depan Publik
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/berita/{post:slug}', [HomeController::class, 'show'])->name('home.posts.show');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'login'])->middleware('guest');
@@ -33,4 +40,10 @@ Route::middleware(['auth'])->group(function () {
 
     // Route manajemen user CRUD yang kita buat sebelumnya
     Route::resource('users', UserController::class)->except(['create', 'edit', 'show']);
+
+    Route::middleware(['auth'])->prefix('dashboard')->group(function () {
+    // Rute bawaan resource mencakup index, create, store, edit, update, destroy
+    Route::resource('posts', PostController::class);
+    Route::resource('categories', CategoryController::class);
+    });
 });

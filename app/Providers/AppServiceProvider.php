@@ -24,8 +24,13 @@ class AppServiceProvider extends ServiceProvider
         //
         // Kirim data setting khusus ke halaman login & layout admin
         // Tambahkan 'welcome' (atau nama file blade depan Anda) ke dalam array ini
-        View::composer(['auth.login', 'dashboard.layouts.admin', 'layouts.app', 'landing'], function ($view) {
-            $view->with('setting', \App\Models\Setting::first());
+        // View::composer(['auth.login', 'dashboard.layouts.admin', 'layouts.app', 'landing'], function ($view) {
+        //     $view->with('setting', \App\Models\Setting::first());
+        // });
+
+        // Membagikan data setting ke seluruh view
+        View::composer('*', function ($view) {
+            $view->with('setting', Setting::first());
         });
     }
 }

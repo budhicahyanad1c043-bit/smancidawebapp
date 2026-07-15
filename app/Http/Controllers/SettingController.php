@@ -22,15 +22,21 @@ class SettingController extends Controller
         $setting = Setting::firstOrCreate(['id' => 1]);
 
         $request->validate([
-            'school_name'     => 'required|string|max:255',
-            'logo'            => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'principal_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'principal_name'  => 'nullable|string|max:255',
-            'vision'          => 'nullable|string',
-            'email'           => 'nullable|email',
-            'phone'           => 'nullable|string',
-            'address'         => 'nullable|string',
-            'website'         => 'nullable|url',
+            'school_name'        => 'required|string|max:255',
+            'logo'               => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'principal_photo'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'principal_name'     => 'nullable|string|max:255',
+            'vision'             => 'nullable|string',
+            'email'              => 'nullable|email',
+            'phone'              => 'nullable|string',
+            'address'            => 'nullable|string',
+            'website'            => 'nullable|url',
+            'facebook_url'       => 'nullable|url',
+            'instagram_url'      => 'nullable|url',
+            'youtube_url'        => 'nullable|url',
+            'welcome_message'    => 'nullable|string',
+            'description_school' => 'nullable|string',
+            'npsn'               => 'nullable|string',
         ]);
 
         // Ambil semua inputan kecuali file gambar

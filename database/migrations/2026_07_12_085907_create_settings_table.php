@@ -25,6 +25,9 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('website')->nullable();
+            $table->string('welcome_message')->nullable();
+            $table->string('description_school')->nullable();
+            $table->string('npsn')->nullable();    
             $table->timestamps();
         });
     }

@@ -13,8 +13,55 @@
     </div>
 </div>
 
+<!-- Sambutan Kepala Sekolah Section (Estetik Card Baru) -->
+<div id="sambutan" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 border-b border-slate-100">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center bg-white border border-slate-200/60 p-6 md:p-8 rounded-2xl shadow-xl shadow-slate-100/30">
+        
+        <!-- Card Foto Kepala Sekolah -->
+        <div class="flex flex-col items-center md:items-start">
+            <div class="relative group w-48 h-60 rounded-xl overflow-hidden shadow-md border border-slate-100 bg-slate-50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                @if($setting && $setting->principal_photo)
+                    <img src="{{ Storage::url($setting->principal_photo) }}" alt="Foto Kepala Sekolah" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                @else
+                    <div class="w-full h-full flex flex-col items-center justify-center bg-blue-50 text-blue-600">
+                        <span class="text-5xl mb-2">👤</span>
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-blue-400">Foto Kosong</p>
+                    </div>
+                @endif
+
+                <!-- Efek Hover Gradasi Nama -->
+                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent p-4 pt-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:block">
+                    <p class="text-white text-xs font-bold">{{ $setting->principal_name ?? 'Nama Kepala Sekolah' }}</p>
+                    <p class="text-slate-300 text-[10px]">Kepala Sekolah</p>
+                </div>
+            </div>
+
+            <!-- Identitas Bawah Foto -->
+            <div class="mt-4 text-center md:text-left">
+                <h3 class="text-sm font-bold text-slate-800 tracking-tight">{{ $setting->principal_name ?? 'Nama Kepala Sekolah, M.Pd.' }}</h3>
+                <p class="text-[11px] font-medium text-blue-600">Kepala Sekolah</p>
+            </div>
+        </div>
+
+        <!-- Konten Narasi Teks Sambutan -->
+        <div class="md:col-span-2 space-y-4 text-center md:text-left">
+            <div class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-blue-50 text-blue-700 uppercase tracking-wider">
+                Sambutan Kepala Sekolah
+            </div>
+            <h2 class="text-xl md:text-2xl font-extrabold text-slate-800 tracking-tight leading-tight">
+                Membangun Generasi Unggul Melalui <br class="hidden sm:inline"> Transformasi Digital Berkarakter
+            </h2>
+            <div class="w-12 h-1 bg-blue-600 rounded-full mx-auto md:mx-0"></div>
+            <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                "{{ $setting->welcome_message ?? 'Selamat datang di website resmi sekolah kami. Kami berkomitmen memberikan ekosistem pembelajaran terbaik yang adaptif, inovatif, serta transparan demi kemajuan seluruh anak didik.' }}"
+            </p>
+        </div>
+
+    </div>
+</div>
+
 <!-- News Grid Section -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<div id="berita" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
     <h2 class="text-lg font-extrabold text-slate-900 mb-8 flex items-center">
         <span class="w-1.5 h-5 bg-blue-600 rounded-full mr-2.5 inline-block"></span>
         Kabar Terbaru Sekolah
@@ -43,7 +90,6 @@
                     <h3 class="font-bold text-slate-800 text-sm sm:text-base line-clamp-2 hover:text-blue-600 transition">
                         <a href="{{ route('home.posts.show', $post->slug) }}">{{ $post->title }}</a>
                     </h3>
-                    <!-- Menghilangkan tag html menggunakan strip_tags agar teks pratonton bersih -->
                     <p class="text-xs text-slate-500 line-clamp-3 leading-relaxed">
                         {{ strip_tags($post->content) }}
                     </p>

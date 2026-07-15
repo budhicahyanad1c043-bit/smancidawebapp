@@ -94,8 +94,18 @@
                         </div>
 
                         <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1.5">Welcome Message</label>
+                            <textarea name="welcome_message" rows="3" class="w-full px-3 py-2 border border-slate-300 rounded-md text-xs focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition resize-none">{{ $setting->welcome_message ?? 'Sambutan kepala sekolah' }}</textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1.5">Deskripsi Sekolah</label>
+                            <textarea name="description_school" rows="3" class="w-full px-3 py-2 border border-slate-300 rounded-md text-xs focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition resize-none">{{ $setting->description_school ?? 'Deskripsi sekolah' }}</textarea>
+                        </div>
+
+                        <div>
                             <label class="block text-xs font-bold text-slate-600 mb-1.5">Visi & Misi Instansi</label>
-                            <textarea name="vision" rows="3" class="w-full px-3 py-2 border border-slate-300 rounded-md text-xs focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition resize-none">{{ $setting->vision ?? '' }}</textarea>
+                            <textarea name="vision" rows="3" class="w-full px-3 py-2 border border-slate-300 rounded-md text-xs focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition resize-none">{{ $setting->vision ?? 'Isi dengan visi dan misi sekolah' }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -112,6 +122,10 @@
                                 <input type="email" name="email" value="{{ $setting->email ?? '' }}" class="w-full px-3 py-2 border border-slate-300 rounded-md text-xs focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition">
                             </div>
                             <div>
+                                <label class="block text-xs font-bold text-slate-600 mb-1.5">NPSN</label>
+                                <input type="text" name="npsn" value="{{ $setting->npsn ?? '69963098' }}" class="w-full px-3 py-2 border border-slate-300 rounded-md text-xs focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition">
+                            </div>
+                            <div>
                                 <label class="block text-xs font-bold text-slate-600 mb-1.5">No. Telepon / Fax</label>
                                 <input type="text" name="phone" value="{{ $setting->phone ?? '' }}" class="w-full px-3 py-2 border border-slate-300 rounded-md text-xs focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition">
                             </div>
@@ -126,6 +140,26 @@
                             <label class="block text-xs font-bold text-slate-600 mb-1.5">Tautan Web Resmi</label>
                             <input type="url" name="website" value="{{ $setting->website ?? '' }}" class="w-full px-3 py-2 border border-slate-300 rounded-md text-xs focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition" placeholder="https://sman1cidahusmi.sch.id">
                         </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1.5">URL Facebook</label>
+                            <input type="url" name="facebook_url" value="{{ old('facebook_url', $setting->facebook_url ?? '') }}" placeholder="https://facebook.com/..." class="w-full px-3 py-2 border border-slate-300 rounded-md text-xs focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition" placeholder="your facebook">
+                            @error('facebook_url') <p class="text-rose-500 text-[10px] mt-1">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1.5">URL Instagram</label>
+                            <input type="url" name="instagram_url" value="{{ old('instagram_url', $setting->instagram_url ?? '') }}" placeholder="https://instagram.com/..." class="w-full px-3 py-2 border border-slate-300 rounded-md text-xs focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition">
+                            @error('instagram_url') <p class="text-rose-500 text-[10px] mt-1">{{ $message }}</p> @enderror
+                        </div>
+
+                        <!-- Youtube -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1.5">URL Youtube</label>
+                            <input type="url" name="youtube_url" value="{{ old('youtube_url', $setting->youtube_url ?? '') }}" placeholder="https://youtube.com/..." class="w-full px-3 py-2 border border-slate-300 rounded-md text-xs focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition">
+                            @error('youtube_url') <p class="text-rose-500 text-[10px] mt-1">{{ $message }}</p> @enderror
+                        </div>
+
                     </div>
 
                     <!-- Footer Box: Tombol Submit -->

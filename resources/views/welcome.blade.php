@@ -4,17 +4,17 @@
 
 @section('content')
 <!-- Hero Section -->
-<div class="bg-white border-b border-slate-100 py-16 sm:py-20">
+<section class="bg-white border-b border-slate-100 py-16 sm:py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700">Pusat Informasi Utama</span>
         <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight max-w-2xl mx-auto">Selamat Datang di Portal Berita</h1>
         <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight max-w-2xl mx-auto">{{ $setting->school_name ?? 'Nama Sekolah' }}</h2>
         <p class="text-sm text-slate-500 max-w-xl mx-auto">Temukan berita terhangat, pengumuman resmi, agenda, dan berbagai prestasi akademik maupun non-akademik di sini.</p>
     </div>
-</div>
+</section>
 
 <!-- Sambutan Kepala Sekolah Section (Estetik Card Baru) -->
-<div id="sambutan" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 border-b border-slate-100">
+<section id="sambutan" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 border-b border-slate-100">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center bg-white border border-slate-200/60 p-6 md:p-8 rounded-2xl shadow-xl shadow-slate-100/30">
         
         <!-- Card Foto Kepala Sekolah -->
@@ -58,10 +58,10 @@
         </div>
 
     </div>
-</div>
+</section>
 
 <!-- News Grid Section -->
-<div id="berita" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+<section id="berita" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <h2 class="text-lg font-extrabold text-slate-900 mb-8 flex items-center">
         <span class="w-1.5 h-5 bg-blue-600 rounded-full mr-2.5 inline-block"></span>
         Kabar Terbaru Sekolah
@@ -112,5 +112,216 @@
     <div class="mt-10">
         {{ $posts->links() }}
     </div>
-</div>
+</section>
+
+<!-- ==================== SECTION EKSTRAKURIKULER ==================== -->
+<section id="ekstrakurikuler" class="py-16 bg-slate-50/50 border-y border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header Section -->
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full uppercase tracking-wider">
+                Pengembangan Diri
+            </span>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-800 tracking-tight mt-3">
+                Ekstrakurikuler Sekolah
+            </h2>
+            <p class="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">
+                Wadah kreativitas, bakat, dan pembentukan karakter unggul bagi seluruh siswa di luar kegiatan akademik formal.
+            </p>
+        </div>
+
+        <!-- Grid Container -->
+        @if($ekskuls->isEmpty())
+            <div class="text-center py-12">
+                <span class="text-4xl block mb-3">🎯</span>
+                <p class="text-xs text-slate-400 italic">Belum ada kegiatan ekstrakurikuler yang dipublikasikan.</p>
+            </div>
+        @else
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach($ekskuls as $ekskul)
+                    <!-- Card Ekskul -->
+                    <div class="group bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden">
+                        
+                        <div>
+                            <!-- Kontainer Foto & Logo (Dihapus overflow-hidden agar logo mengambang bebas keluar batas) -->
+                            <div class="relative h-48">
+                                <!-- Pembungkus Gambar Baru (Disini baru diberikan overflow-hidden) -->
+                                <div class="w-full h-full rounded-t-2xl overflow-hidden bg-slate-100">
+                                    @if($ekskul->image)
+                                        <img src="{{ Storage::url($ekskul->image) }}" alt="Kegiatan {{ $ekskul->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                    @else
+                                        <!-- Placeholder jika tidak ada foto sampul -->
+                                        <div class="w-full h-full flex items-center justify-center bg-slate-50 text-slate-300">
+                                            <span class="text-5xl">🎯</span>
+                                        </div>
+                                    @endif
+                                </div>
+
+                                <!-- Logo Ekskul Mengambang di Pojok Kiri Bawah Sampul (Sekarang Aman Tidak Terpotong) -->
+                                <div class="absolute -bottom-5 left-5 z-10">
+                                    <div class="w-12 h-12 rounded-xl bg-white shadow-md border border-slate-100 p-1 flex items-center justify-center">
+                                        @if($ekskul->logo)
+                                            <img src="{{ Storage::url($ekskul->logo) }}" alt="Logo {{ $ekskul->name }}" class="w-full h-full object-contain">
+                                        @else
+                                            <span class="text-lg">🎯</span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Konten Card (Ditambahkan pt-9 agar teks tidak terlalu mepet dengan logo yang mengambang) -->
+                            <div class="p-6 pt-9">
+                                <h3 class="text-base font-bold text-slate-800 tracking-tight group-hover:text-blue-600 transition-colors">
+                                    {{ $ekskul->name }}
+                                </h3>
+                                <p class="text-[11px] md:text-xs text-slate-500 mt-2.5 leading-relaxed line-clamp-3">
+                                    {{ $ekskul->description }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Footer Card (Aksi) -->
+                        <div class="px-6 pb-6 pt-2 border-t border-slate-50 flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                                Aktif & Terbuka
+                            </span>
+                            <button 
+                                type="button"
+                                class="btn-detail-ekskul text-[11px] font-bold text-blue-600 hover:text-blue-700 hover:underline transition flex items-center space-x-1"
+                                data-name="{{ $ekskul->name }}"
+                                data-logo="{{ $ekskul->logo ? Storage::url($ekskul->logo) : '' }}"
+                                data-image="{{ $ekskul->image ? Storage::url($ekskul->image) : '' }}"
+                                data-description="{{ $ekskul->description }}">
+                                <span>Lihat Detail</span>
+                                <span>➔</span>
+                            </button>
+                        </div>
+
+                    </div>
+                @endforeach
+            </div>
+        @endif
+
+    </div>
+</section>
+
+<!-- ==================== POPUP DETAIL MODAL (SweetAlert2) ==================== -->
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const detailButtons = document.querySelectorAll('.btn-detail-ekskul');
+
+        detailButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const nama = this.getAttribute('data-name');
+                const logo = this.getAttribute('data-logo');
+                const image = this.getAttribute('data-image');
+                const deskripsi = this.getAttribute('data-description');
+
+                const deskripsiFormatted = deskripsi.replace(/(?:\r\n|\r|\n)/g, '<br>');
+
+                let htmlContent = `
+                    <div class="text-left font-sans">
+                        <!-- Area Foto Sampul -->
+                        ${image ? `
+                            <div class="relative w-full h-52 overflow-hidden rounded-2xl mb-5 shadow-md">
+                                <img src="${image}" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent"></div>
+                            </div>
+                        ` : ''}
+
+                        <!-- Info Header Ekskul -->
+                        <div class="flex items-center space-x-4 mb-5 pb-4 border-b border-slate-100">
+                            <div class="flex-shrink-0">
+                                ${logo ? `
+                                    <div class="w-14 h-14 rounded-2xl bg-white border border-slate-150 p-1.5 shadow-sm flex items-center justify-center">
+                                        <img src="${logo}" class="w-full h-full object-contain">
+                                    </div>
+                                ` : `
+                                    <div class="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-2xl shadow-sm">
+                                        🎯
+                                    </div>
+                                `}
+                            </div>
+                            <div>
+                                <span class="text-[9px] font-extrabold tracking-wider text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase">
+                                    ✨ Ekstrakurikuler
+                                </span>
+                                <h4 class="font-extrabold text-slate-800 text-base md:text-lg tracking-tight mt-1">
+                                    ${nama}
+                                </h4>
+                            </div>
+                        </div>
+
+                        <!-- Area Deskripsi -->
+                        <div class="space-y-2">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Tentang Kegiatan</span>
+                            <div class="max-h-56 overflow-y-auto pr-2 custom-scrollbar">
+                                <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                                    ${deskripsiFormatted}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                Swal.fire({
+                    html: htmlContent,
+                    showCloseButton: true,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    width: '480px',
+                    customClass: {
+                        popup: 'rounded-3xl p-6 shadow-xl border border-slate-100 bg-white/95 backdrop-blur-md relative',
+                        closeButton: 'focus:outline-none focus:ring-0 custom-swal-close'
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+<style>
+    /* Mengontrol ukuran tombol close secara spesifik agar tidak terpengaruh font global */
+    .custom-swal-close {
+        font-size: 20px !important; /* Ukuran silang mini yang estetik */
+        width: 32px !important;
+        height: 32px !important;
+        line-height: 32px !important;
+        color: #94a3b8 !important; /* Warna abu-abu slate-400 */
+        background: #f1f5f9 !important; /* Background bulat abu-abu sangat muda */
+        border-radius: 50% !important;
+        transition: all 0.2s ease;
+        position: absolute !important;
+        top: 16px !important;
+        right: 16px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .custom-swal-close:hover {
+        color: #ef4444 !important; /* Berubah kemerahan saat dihover */
+        background: #ffeeef !important;
+    }
+
+    /* Scrollbar minimalis di dalam modal */
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 10px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+</style>
+@endpush

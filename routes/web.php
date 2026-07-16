@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\PostController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Dashboard\ProfileController;
+use App\Http\Controllers\ExtracurricularController;
 
 // Route::get('/', function () {
 //     return view('landing');
@@ -42,12 +43,26 @@ Route::middleware(['auth'])->group(function () {
     // Route manajemen user CRUD yang kita buat sebelumnya
     Route::resource('users', UserController::class)->except(['create', 'edit', 'show']);
 
-    Route::middleware(['auth'])->prefix('dashboard')->group(function () {
-    // Rute bawaan resource mencakup index, create, store, edit, update, destroy
+    Route::middleware(['auth'])->prefix('dashboard')->name('dashboard.')->group(function () {
+    // Route resource otomatis akan membuat nama route: dashboard.posts.update, dashboard.posts.index, dll.
     Route::resource('posts', PostController::class);
-    Route::resource('categories', CategoryController::class);
-
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     });
-});
+
+    });
+
+    Route::middleware(['auth'])->prefix('dashboard')->group(function () {
+        // Rute bawaan resource mencakup index, create, store, edit, update, destroy
+        // Route::resource('posts', PostController::class);
+
+        Route::resource('categories', CategoryController::class);
+
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        });
+
+        Route::middleware(['auth'])->prefix('dashboard')->name('dashboard.')->group(function () {
+        // Route resource otomatis mencakup index, create, store, edit, update, destroy
+        Route::resource('extracurriculars', ExtracurricularController::class);
+    });
+
+    

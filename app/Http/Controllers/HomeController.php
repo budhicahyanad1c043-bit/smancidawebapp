@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Setting;
+use App\Models\Extracurricular;
 
 class HomeController extends Controller
 {
@@ -18,8 +19,9 @@ class HomeController extends Controller
                     ->where('status', 'published')
                     ->latest()
                     ->paginate(6);
+        $ekskuls = Extracurricular::latest()->get();
 
-        return view('welcome', compact('posts', 'setting'));
+        return view('welcome', compact('posts', 'setting', 'ekskuls'));
     }
 
     // Menampilkan detail berita saat diklik
@@ -29,6 +31,7 @@ class HomeController extends Controller
         if ($post->status !== 'published') {
             abort(404);
         }
+
         $setting = Setting::first();
         return view('show-post', compact('post', 'setting'));
     }

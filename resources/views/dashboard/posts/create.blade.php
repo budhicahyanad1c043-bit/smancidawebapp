@@ -9,7 +9,7 @@
         <p class="text-xs text-slate-500">Buat rilis berita atau artikel informasi kegiatan sekolah.</p>
     </div>
 
-    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data" class="bg-white border border-slate-200 rounded-xl shadow-sm p-6 space-y-5">
+    <form action="{{ route('dashboard.posts.store') }}" method="POST" enctype="multipart/form-data" class="bg-white border border-slate-200 rounded-xl shadow-sm p-6 space-y-5">
         @csrf
 
         <div>
@@ -65,7 +65,7 @@
         </div>
 
         <div class="flex items-center justify-end space-x-2 pt-2 border-t border-slate-100">
-            <a href="{{ route('posts.index') }}" class="px-4 py-2 border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-50 transition">Batal</a>
+            <a href="{{ route('dashboard.posts.index') }}" class="px-4 py-2 border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-50 transition">Batal</a>
             <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-bold shadow-sm shadow-blue-500/20 hover:bg-blue-700 transition">Simpan Konten</button>
         </div>
     </form>
@@ -78,7 +78,7 @@
         const file = event.target.files[0];
         const previewContainer = document.getElementById('previewContainer');
         const imagePreview = document.getElementById('imagePreview');
-        const maxCoverSize = 2 * 1024 * 1024; // Batas Maksimal 2MB
+        const maxCoverSize = 5 * 1024 * 1024; // Batas Maksimal 5MB
 
         if (file) {
             // Validasi Ukuran Gambar Sampul
@@ -86,7 +86,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Ukuran Gambar Terlalu Besar',
-                    text: 'Maksimal ukuran gambar sampul artikel adalah 2MB.',
+                    text: 'Maksimal ukuran gambar sampul artikel adalah 5MB.',
                     confirmButtonColor: '#2563eb',
                     customClass: {
                         popup: 'rounded-xl',

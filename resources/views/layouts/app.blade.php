@@ -35,9 +35,24 @@
 
                 <!-- Menu Navigasi Kanan (TAMPIL DI DESKTOP) -->
                 <div class="hidden md:flex space-x-6 text-xs font-semibold text-slate-600">
-                    <a href="/" class="text-blue-600 font-bold">Beranda</a>
-                    <a href="#ekstrakurikuler" class="hover:text-blue-600 transition">Ekstrakurikuler</a>
-                    <a href="#berita" class="hover:text-blue-600 transition">Smancida News</a>
+                    <!-- Menu Beranda -->
+                    <a href="/" 
+                    class="nav-link text-xs font-bold transition-colors duration-200 {{ request()->routeIs('home') ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600' }}">
+                        Beranda
+                    </a>
+
+                    <!-- Menu Smancida News -->
+                    <a href="/#berita" 
+                    class="nav-link text-xs font-bold transition-colors duration-200 {{ request()->routeIs('home.posts*') ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600' }}">
+                        Smancida News
+                    </a>
+                    
+                    <!-- Menu Ekstrakurikuler (Aktif jika rutenya adalah 'ekstrakurikuler' atau turunannya) -->
+                    <a href="/#ekstrakurikuler" 
+                    class="nav-link text-xs font-bold transition-colors duration-200 {{ request()->routeIs('ekstrakurikuler*') ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600' }}">
+                        Ekstrakurikuler
+                    </a>
+
                 </div>
 
                 <!-- Tombol Hamburger (TAMPIL HANYA DI MOBILE) -->
@@ -59,9 +74,9 @@
 
         <!-- Menu Navigasi Dropdown (HANYA MUNCUL DI MOBILE SAAT DIKLIK) -->
         <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-1 shadow-inner">
-            <a href="/" class="block text-xs font-bold text-blue-600 py-2.5 px-3 rounded-lg bg-blue-50/50">Beranda</a>
-            <a href="#ekstrakurikuler" class="block text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-slate-50 py-2.5 px-3 rounded-lg transition">Ekstrakurikuler</a>
-            <a href="#berita" class="block text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-slate-50 py-2.5 px-3 rounded-lg transition">Smancida New</a>
+            <a href="/#home" class="nav-link block text-xs font-bold py-2.5 px-3 rounded-lg {{ request()->routeIs('home') ? 'text-blue-600 bg-blue-50/50 ' : 'text-slate-600 hover:text-blue-600' }}">Beranda</a>
+            <a href="/#berita" class="nav-link block text-xs font-semibold hover:text-blue-600 hover:bg-slate-50 py-2.5 px-3 rounded-lg transition {{ request()->routeIs('home.posts*') ? 'text-blue-600 bg-blue-50/50' : 'text-slate-600 hover:text-blue-600' }}">Smancida News</a>
+            <a href="/#ekstrakurikuler" class="nav-link block text-xs font-semibold hover:text-blue-600 hover:bg-slate-50 py-2.5 px-3 rounded-lg transition {{ request()->routeIs('ekstrakurikuler*') ? 'text-blue-600 bg-blue-50/50 ' : 'text-slate-600 hover:text-blue-600' }}">Ekstrakurikuler</a>
         </div>
     </nav>
 
@@ -72,6 +87,7 @@
 
     <!-- FOOTER -->
     @include('layouts.footer')
+    
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         const menuBtn = document.getElementById('menu-btn');
@@ -101,6 +117,7 @@
             }
         });
     </script>
+    
     @stack('scripts')
 </body>
 </html>

@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="bg-white border-b border-slate-100 py-16 sm:py-20">
+<section class="bg-white border-b border-slate-100 py-16 sm:py-20" id="home">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700">Pusat Informasi Utama</span>
         <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight max-w-2xl mx-auto">Selamat Datang di Portal Berita</h1>
@@ -61,7 +61,7 @@
 </section>
 
 <!-- News Grid Section -->
-<section id="berita" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+<section id="berita" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-18">
     <h2 class="text-lg font-extrabold text-slate-900 mb-8 flex items-center">
         <span class="w-1.5 h-5 bg-blue-600 rounded-full mr-2.5 inline-block"></span>
         Kabar Terbaru Sekolah
@@ -115,7 +115,7 @@
 </section>
 
 <!-- ==================== SECTION EKSTRAKURIKULER ==================== -->
-<section id="ekstrakurikuler" class="py-16 bg-slate-50/50 border-y border-slate-100">
+<section id="ekstrakurikuler" class="py-17 bg-slate-50/50 border-y border-slate-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <!-- Header Section -->
@@ -210,6 +210,103 @@
 @endsection
 
 @push('scripts')
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const navLinks = document.querySelectorAll('.nav-link');
+        let isClicking = false; 
+
+        // Ambil semua section yang valid berdasarkan href menu
+        const sections = [];
+        navLinks.forEach(link => {
+            const targetId = link.getAttribute('href');
+            if (targetId && targetId.startsWith('#')) {
+                const section = document.querySelector(targetId);
+                if (section) {
+                    sections.push({ link: link, element: section, id: targetId });
+                }
+            }
+        });
+
+        // Fungsi mengubah warna kelas aktif
+        function changeActiveLink(activeLink) {
+            navLinks.forEach(l => {
+                l.classList.remove('text-blue-600');
+                l.classList.add('text-slate-600', 'hover:text-blue-600');
+            });
+            if (activeLink) {
+                activeLink.classList.remove('text-slate-600', 'hover:text-blue-600');
+                activeLink.classList.add('text-blue-600');
+            }
+        }
+
+        // 1. HANDLER KLIK: Mengubah URL & Warna secara instan
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                isClicking = true;
+                changeActiveLink(this);
+                
+                // Ubah URL secara halus di browser
+                const targetId = this.getAttribute('href');
+                history.pushState(null, null, targetId);
+
+                setTimeout(() => {
+                    isClicking = false;
+                }, 800);
+            });
+        });
+
+        // 2. HANDLER SCROLL: Deteksi Posisi Layar + Update URL Otomatis
+        window.addEventListener('scroll', function() {
+            if (isClicking) return; 
+
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            
+            // JIKA MENTOK BAWAH HALAMAN
+            if (scrollPosition + windowHeight >= documentHeight - 50) {
+                if (sections.length > 0) {
+                    const lastItem = sections[sections.length - 1];
+                    changeActiveLink(lastItem.link);
+                    if (window.location.hash !== lastItem.id) {
+                        history.pushState(null, null, lastItem.id);
+                    }
+                }
+                return;
+            }
+
+            let currentActiveLink = null;
+            let currentActiveId = null;
+
+            // Gunakan metode offsetTop dengan toleransi 200px agar responsif
+            sections.forEach(item => {
+                const sectionTop = item.element.offsetTop - 200; 
+                if (scrollPosition >= sectionTop) {
+                    currentActiveLink = item.link;
+                    currentActiveId = item.id;
+                }
+            });
+
+            // Jika posisi berada di paling atas halaman
+            if (scrollPosition < 100 && sections.length > 0) {
+                currentActiveLink = sections[0].link;
+                currentActiveId = sections[0].id;
+            }
+
+            // Eksekusi perubahan warna dan URL jika terdeteksi section baru
+            if (currentActiveLink) {
+                changeActiveLink(currentActiveLink);
+                
+                // Hanya update URL jika hash yang sekarang berbeda (mencegah lag scroll)
+                if (currentActiveId && window.location.hash !== currentActiveId) {
+                    history.pushState(null, null, currentActiveId);
+                }
+            }
+        });
+    });
+</script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const detailButtons = document.querySelectorAll('.btn-detail-ekskul');
@@ -283,6 +380,7 @@
         });
     });
 </script>
+
 
 <style>
     /* Mengontrol ukuran tombol close secara spesifik agar tidak terpengaruh font global */

@@ -3,14 +3,14 @@
 @section('title', 'Galleries')
 
 @section('content')
-<div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-sm">
-    <div class="flex items-center justify-between mb-6">
+<div class="max-w-6xl mx-auto px-4 py-6 space-y-6">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
             <h2 class="text-xl font-bold text-slate-800">Galeri Foto Kegiatan</h2>
             <p class="text-xs text-slate-500">Kelola dokumentasi visual seluruh kegiatan resmi SMAN 1 Cidahu</p>
         </div>
-        <a href="{{ route('galleries.create') }}" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold rounded-lg shadow transition">
-            + Unggah Foto
+        <a href="{{ route('galleries.create') }}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-bold shadow-sm shadow-blue-500/20 hover:bg-blue-700 transition">
+            <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path></svg>Unggah Foto
         </a>
     </div>
 
@@ -21,7 +21,7 @@
     @endif
 
     <!-- Grid Layout Kartu Galeri -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="sm:grid sm:grid-cols-2 md:grid-cols-4 gap-4">
         @forelse($galleries as $gallery)
             <div class="border border-slate-100 rounded-xl overflow-hidden shadow-sm bg-slate-50/50 group flex flex-col justify-between">
                 <div class="relative aspect-video overflow-hidden bg-slate-200">

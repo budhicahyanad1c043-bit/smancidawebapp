@@ -8,9 +8,9 @@
             <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wider">Manajemen Ekstrakurikuler</h2>
             <p class="text-[11px] text-slate-500 mt-1">Kelola daftar kegiatan ekstrakurikuler yang aktif di sekolah.</p>
         </div>
-        <a href="{{ route('dashboard.extracurriculars.create') }}" class="px-4 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition flex items-center space-x-1.5">
-            <span>➕</span>
-            <span>Tambah Ekskul</span>
+        <a href="{{ route('dashboard.extracurriculars.create') }}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-bold shadow-sm shadow-blue-500/20 hover:bg-blue-700 transition">
+            <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path></svg>
+            Tambah Ekskul
         </a>
     </div>
 

@@ -3,7 +3,7 @@
 @section('content')
 <div class="max-w-6xl mx-auto px-4 py-6">
     <!-- Header Section -->
-    <div class="flex justify-between items-center mb-6">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
             <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wider">Manajemen Ekstrakurikuler</h2>
             <p class="text-[11px] text-slate-500 mt-1">Kelola daftar kegiatan ekstrakurikuler yang aktif di sekolah.</p>

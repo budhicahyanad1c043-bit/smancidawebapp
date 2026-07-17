@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.admin')
 @section('title', 'Kelola Ekskul')
 @section('content')
-<div class="max-w-6xl mx-auto px-4 py-6">
+<div class="max-w-6xl mx-auto px-4 py-6 space-y-6">
     <!-- Header Section -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>

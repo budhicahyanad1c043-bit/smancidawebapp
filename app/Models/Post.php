@@ -18,7 +18,9 @@ class Post extends Model
         'image',
         'status',
         'user_id',
-        'category_id'
+        'category_id',
+        'instagram_link', // Tambah ini
+        'youtube_link'     // Tambah ini
     ];
 
     // Relasi balik ke Kategori

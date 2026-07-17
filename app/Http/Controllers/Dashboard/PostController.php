@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,6 +29,8 @@ class PostController extends Controller
             'content' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'status' => 'required|in:draft,published',
+            'instagram_link' => 'nullable|url', // Validasi link IG
+            'youtube_link' => 'nullable|url',    // Validasi link YT
         ]);
 
         $imagePath = null;
@@ -40,6 +43,8 @@ class PostController extends Controller
             'content' => $request->content,
             'image' => $imagePath,
             'status' => $request->status,
+            'instagram_link' => $request->instagram_link,
+            'youtube_link' => $request->youtube_link,
             'user_id' => auth()->id(),
             'category_id' => $request->category_id,
         ]);
@@ -49,7 +54,8 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        return view('dashboard.posts.edit', compact('post'));
+        $categories = Category::all();
+        return view('dashboard.posts.edit', compact('post', 'categories'));
     }
 
     public function update(Request $request, Post $post)
@@ -59,6 +65,8 @@ class PostController extends Controller
             'content' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'status' => 'required|in:draft,published',
+            'instagram_link' => 'nullable|url', // Validasi link IG
+            'youtube_link' => 'nullable|url',    // Validasi link YT
         ]);
 
         if ($request->hasFile('image')) {
@@ -72,6 +80,9 @@ class PostController extends Controller
             'title' => $request->title,
             'content' => $request->content,
             'status' => $request->status,
+            'status' => $request->status,
+            'instagram_link' => $request->instagram_link,
+            'youtube_link' => $request->youtube_link,
         ]);
 
         return redirect()->route('dashboard.posts.index')->with('success', 'Berita berhasil diperbarui!');

@@ -6,7 +6,7 @@
             <div class="space-y-3">
                 <h3 class="text-white font-bold text-lg">{{ $setting->school_name ?? 'Nama Sekolah' }}</h3>
                 <p class="text-xs leading-relaxed max-w-xs">
-                    {{ Str::limit($setting->description_school ?? 'Deskripsi sekolah.', 150) }}
+                    {{ Str::limit($setting->description_school ?? 'Deskripsi sekolah.', 400) }}
                 </p>
             </div>
 

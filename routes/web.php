@@ -49,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('settings', [SettingController::class, 'update'])->name('settings.update');
 
     // Route manajemen user CRUD yang kita buat sebelumnya
-    Route::resource('users', UserController::class)->except(['create', 'edit', 'show']);
+    // Route::resource('users', UserController::class)->except(['create', 'edit', 'show']);
     
     });
     

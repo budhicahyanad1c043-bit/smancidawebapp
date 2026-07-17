@@ -34,8 +34,8 @@ class SettingController extends Controller
             'facebook_url'       => 'nullable|url',
             'instagram_url'      => 'nullable|url',
             'youtube_url'        => 'nullable|url',
-            'welcome_message'    => 'nullable|string',
-            'description_school' => 'nullable|string',
+            'welcome_message'    => 'nullable',
+            'description_school' => 'nullable',
             'npsn'               => 'nullable|string',
         ]);
 

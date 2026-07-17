@@ -11,7 +11,7 @@
         </div>
 
         <!-- Perhatikan Route diarahkan ke '.store' untuk penyimpanan data baru -->
-        <form action="{{ route('dashboard.posts.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+        <form action="{{ route('dashboard.posts.store') }}" method="POST" enctype="multipart/form-data" class="bg-white border border-slate-200 rounded-xl shadow-sm p-6 space-y-5">
             @csrf
 
             <!-- Judul Artikel -->

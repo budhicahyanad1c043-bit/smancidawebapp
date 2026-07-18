@@ -257,9 +257,12 @@
             </div>
         </div>
         @empty
-        <div class="col-span-full py-12 text-center text-slate-400 text-xs">
-            Belum ada berita yang diterbitkan untuk saat ini.
-        </div>
+        <div class="col-span-1 md:col-span-3 p-12 text-center bg-white border border-dashed border-slate-200 rounded-2xl">
+                    <div class="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-3 text-slate-400">
+                        📢
+                    </div>
+                    <p class="text-xs text-slate-400 italic">Belum ada berita yang diterbitkan saat ini.</p>
+                </div>
         @endforelse
     </div>
 

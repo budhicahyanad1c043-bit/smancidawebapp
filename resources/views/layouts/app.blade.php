@@ -98,6 +98,38 @@
 
     <!-- FOOTER -->
     @include('layouts.footer')
+
+    <!-- Tombol Back to Top -->
+    <button id="btnBackToTop" onclick="scrollToTop()" 
+            class="fixed bottom-6 right-6 z-50 hidden p-3 rounded-full bg-purple-600 text-white shadow-lg transition-all duration-300 hover:bg-purple-700 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
+        <!-- Icon Panah Atas (SVG Tailwind murni) -->
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"></path>
+        </svg>
+    </button>
+
+    <script>
+        // Mengambil elemen tombol
+        const backToTopButton = document.getElementById("btnBackToTop");
+
+        // Fungsi untuk memantau scroll halaman
+        window.onscroll = function() {
+            // Jika halaman di-scroll lebih dari 300px, munculkan tombol
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTopButton.classList.remove("hidden");
+            } else {
+                backToTopButton.classList.add("hidden");
+            }
+        };
+
+        // Fungsi untuk mengarahkan halaman ke paling atas secara smooth (halus)
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+    </script>
     
     <script>
     document.addEventListener('DOMContentLoaded', function () {

@@ -37,7 +37,7 @@
             </div>
             <div class="space-y-2">
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-500">Foto Avatar</label>
-                <input type="file" name="avatar" id="imageInput" accept="image/*" class="text-xs text-slate-500 file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 transition pointer-events-auto">
+                <input type="file" name="avatar" id="imageInput" class="text-xs text-slate-500 file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 transition pointer-events-auto">
                 <p class="text-[10px] text-slate-400">Format: JPG, JPEG, PNG. Maksimal file 2MB.</p>
                 @error('avatar') <p class="text-rose-500 text-[11px] mt-1">{{ $message }}</p> @enderror
             </div>

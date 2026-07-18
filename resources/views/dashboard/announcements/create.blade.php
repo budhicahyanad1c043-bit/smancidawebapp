@@ -20,14 +20,14 @@
         <div class="grid grid-cols-2 gap-4 mb-4">
             <div>
                 <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Tingkat Kepentingan</label>
-                <select name="type" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-xs">
+                <select name="type" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-[10px] md:text-xs">
                     <option value="biasa">Biasa (Informasi Umum)</option>
                     <option value="penting">Penting (Wajib Dibaca)</option>
                 </select>
             </div>
             <div>
                 <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Status Publikasi</label>
-                <select name="status" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-xs">
+                <select name="status" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-[10px] md:text-xs">
                     <option value="active">Langsung Publikasikan</option>
                     <option value="draft">Simpan Sebagai Draft</option>
                 </select>

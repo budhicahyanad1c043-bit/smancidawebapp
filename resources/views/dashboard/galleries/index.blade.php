@@ -32,12 +32,12 @@
                     <p class="text-[11px] text-slate-400 line-clamp-2">{{ $gallery->description ?? 'Tidak ada keterangan.' }}</p>
                     
                     <!-- Tombol Aksi -->
-                    <div class="flex items-center gap-2 mt-3 pt-2 border-t border-slate-100">
-                        <a href="{{ route('galleries.edit', $gallery->id) }}" class="text-[10px] font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded hover:bg-amber-100 transition">Edit</a>
-                        <form action="{{ route('galleries.destroy', $gallery->id) }}" method="POST" class="delete-form-image">
+                    <div class="flex items-center gap-3 mt-3 pt-2 border-t border-slate-100">
+                        <a href="{{ route('galleries.edit', $gallery->id) }}" class="text-[10px] border font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded hover:bg-amber-100 transition">Edit</a>
+                        <form action="{{ route('galleries.destroy', $gallery->id) }}" method="POST" class="flex  items-center delete-form-image">
                             @csrf
                             @method('DELETE')
-                            <button type="button" class="text-[10px] btn-delete-image font-bold text-red-600 bg-red-50 px-2 py-1 rounded hover:bg-red-100 transition">Hapus</button>
+                            <button type="button" class="text-[10px] btn-delete-image border font-bold text-red-600 bg-red-50 px-2 py-1 rounded hover:bg-red-100 transition">Hapus</button>
                         </form>
                     </div>
                 </div>

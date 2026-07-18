@@ -9,7 +9,12 @@
             <h1 class="text-3xl font-extrabold text-slate-800 tracking-tight">Semua Pengumuman Sekolah</h1>
             <p class="text-xs text-slate-500 mt-2">Daftar maklumat, arsip pengumuman, dan berita resmi SMAN 1 Cidahu</p>
         </div>
-
+        <div class="my-8">
+            <a href="/" class="text-xs font-bold text-purple-600 hover:text-purple-700 flex items-center gap-1 transition group">
+                <span class="transform group-hover:-translate-x-1 transition-transform">←</span>
+                Kembali ke Beranda 
+            </a>
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             @forelse($announcements as $announcement)
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between relative overflow-hidden group">

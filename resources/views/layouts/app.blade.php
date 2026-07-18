@@ -41,9 +41,15 @@
                         Beranda
                     </a>
 
+                    <!-- Menu Pengumuman -->
+                    <a href="/pengumuman" 
+                    class="nav-link text-xs font-bold transition-colors duration-200 {{ request()->routeIs('front.announcements*') ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600' }}">
+                        Pengumuman
+                    </a>
+
                     <!-- Menu Smancida News -->
-                    <a href="/#berita" 
-                    class="nav-link text-xs font-bold transition-colors duration-200 {{ request()->routeIs('home.posts*') ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600' }}">
+                    <a href="/berita" 
+                    class="nav-link text-xs font-bold transition-colors duration-200 {{ request()->routeIs('front.posts*') ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600' }}">
                         Smancida News
                     </a>
                     
@@ -74,8 +80,13 @@
 
         <!-- Menu Navigasi Dropdown (HANYA MUNCUL DI MOBILE SAAT DIKLIK) -->
         <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-1 shadow-inner">
-            <a href="/#home" class="nav-link block text-xs font-bold py-2.5 px-3 rounded-lg {{ request()->routeIs('home') ? 'text-blue-600 bg-blue-50/50 ' : 'text-slate-600 hover:text-blue-600' }}">Beranda</a>
-            <a href="/#berita" class="nav-link block text-xs font-semibold hover:text-blue-600 hover:bg-slate-50 py-2.5 px-3 rounded-lg transition {{ request()->routeIs('home.posts*') ? 'text-blue-600 bg-blue-50/50' : 'text-slate-600 hover:text-blue-600' }}">Smancida News</a>
+
+            <a href="/" class="nav-link block text-xs font-bold py-2.5 px-3 rounded-lg {{ request()->routeIs('home') ? 'text-blue-600 bg-blue-50/50 ' : 'text-slate-600 hover:text-blue-600' }}">Beranda</a>
+
+            <a href="/pengumuman" class="nav-link block text-xs font-semibold hover:text-blue-600 hover:bg-slate-50 py-2.5 px-3 rounded-lg transition {{ request()->routeIs('front.announcements*') ? 'text-blue-600 bg-blue-50/50' : 'text-slate-600 hover:text-blue-600' }}">Pengumuman</a>
+
+            <a href="/berita" class="nav-link block text-xs font-semibold hover:text-blue-600 hover:bg-slate-50 py-2.5 px-3 rounded-lg transition {{ request()->routeIs('front.posts*') ? 'text-blue-600 bg-blue-50/50' : 'text-slate-600 hover:text-blue-600' }}">Smancida News</a>
+
             <a href="/#ekstrakurikuler" class="nav-link block text-xs font-semibold hover:text-blue-600 hover:bg-slate-50 py-2.5 px-3 rounded-lg transition {{ request()->routeIs('ekstrakurikuler*') ? 'text-blue-600 bg-blue-50/50 ' : 'text-slate-600 hover:text-blue-600' }}">Ekstrakurikuler</a>
         </div>
     </nav>

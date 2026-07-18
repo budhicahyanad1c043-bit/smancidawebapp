@@ -9,7 +9,7 @@
         <p class="text-xs text-slate-500">Sebarkan maklumat terbaru ke halaman utama website sekolah</p>
     </div>
 
-    <form action="{{ route('announcements.store') }}" method="POST" class="bg-white border border-slate-200 rounded-xl shadow-sm p-6 space-y-5">
+    <form action="{{ route('announcements.store') }}" method="POST" enctype="multipart/form-data" class="bg-white border border-slate-200 rounded-xl shadow-sm p-6 space-y-5">
         @csrf
         
         <div class="mb-4">
@@ -34,6 +34,27 @@
             </div>
         </div>
 
+        <!-- Input Flyer -->
+        <div class="mb-4">
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Image Flyer (Pamflet)</label>
+            <input type="file" name="flyer" id="imageflyer" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 cursor-pointer">
+            <div id="previewContainer" class="mt-4 p-2 border border-dashed border-slate-200 rounded-xl max-w-sm bg-slate-50">
+                <img id="imagePreview"  alt="Preview" class="h-24 w-full object-cover hidden border border-slate-200 rounded-lg">
+            </div>
+        </div>
+
+        <!-- Input Tautan -->
+        <div class="mb-4">
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Tautan / Link Eksternal</label>
+            <input type="url" name="link_url" value="{{ old('link_url') }}" placeholder="https://example.com/formulir" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-xs">
+        </div>
+
+        <!-- Input Related Social Media Topics -->
+        <div class="mb-4">
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Topik Sosmed / Tagar Terkait</label>
+            <input type="text" name="related_topics" value="{{ old('related_topics') }}" placeholder="Contoh: #MPLS2026 #SMAN1Cidahu #InfoSekolah" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-xs">
+        </div>
+
         <div class="mb-5">
             <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Isi Konten Berita</label>
             
@@ -53,3 +74,54 @@
     </form>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    // Batas maksimal ukuran file (3MB sesuai validasi di Controller)
+    const maxFileSize = 5 * 1024 * 1024; 
+
+    function setupLivePreview(inputId, previewId, containerId) {
+        const inputEl = document.getElementById(inputId);
+        if (!inputEl) return;
+
+        inputEl.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById(previewId);
+            const container = document.getElementById(containerId);
+
+            if (file) {
+                // Validasi Ukuran File
+                if (file.size > maxFileSize) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'File Terlalu Besar',
+                        text: 'Maksimal ukuran file flyer adalah 5MB.',
+                        confirmButtonColor: '#2563eb',
+                        customClass: { popup: 'rounded-xl', confirmButton: 'rounded-lg text-xs px-4 py-2 font-bold' }
+                    });
+                    this.value = ''; // Reset input file
+                    preview.src = '#';
+                    preview.classList.add('hidden');
+                    return;
+                }
+
+                // Tampilkan Preview Jika Lolos Validasi
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.classList.remove('hidden');
+                    preview.classList.add('h-52', 'object-contain'); // Mempercantik rasio aspek
+                    preview.classList.remove('h-24', 'object-cover');
+                }
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '#';
+                preview.classList.add('hidden');
+            }
+        });
+    }
+
+    // Aktifkan live preview untuk halaman Create
+    setupLivePreview('imageflyer', 'imagePreview', 'previewContainer');
+</script>
+@endpush

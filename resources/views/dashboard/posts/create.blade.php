@@ -1,11 +1,14 @@
 @extends('dashboard.layouts.admin')
+
 @section('title', 'Buat Berita & Artikel')
+
 @section('content')
-<div class="max-w-5xl mx-auto px-4 py-6">
+
+<div class="max-w-2xl mx-auto space-y-6">
     <!-- Header Halaman -->
     <div class="mb-5">
-        <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wider">Tambah Berita / Artikel Baru</h2>
-        <p class="text-[11px] text-slate-500 mt-1">Buat rilis berita, pengumuman resmi, atau artikel kegiatan sekolah terbaru.</p>
+        <h2 class="text-xl font-bold text-slate-800 tracking-tight">Tambah Berita / Artikel Baru</h2>
+        <p class="text-xs text-slate-500 font-medium">Buat rilis berita, pengumuman resmi, atau artikel kegiatan sekolah terbaru.</p>
     </div>
 
     <!-- Perhatikan Route diarahkan ke '.store' untuk penyimpanan data baru -->

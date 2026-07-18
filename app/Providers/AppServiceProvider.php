@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Setting;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         // });
 
         // Membagikan data setting ke seluruh view
+        Paginator::useTailwind();
         View::composer('*', function ($view) {
             $view->with('setting', Setting::first());
         });

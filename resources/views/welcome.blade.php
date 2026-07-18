@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="bg-white border-b border-slate-100 py-16 sm:py-20" id="home">
+<section class="bg-white border-b border-slate-100 py-16 sm:py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700">Pusat Informasi Utama</span>
         <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight max-w-2xl mx-auto">Selamat Datang di Portal Berita</h1>
@@ -14,15 +14,15 @@
 </section>
 
 <!-- SECTION PENGUMUMAN RESMI SEKOLAH -->
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 border-b border-slate-100">
+<section id="pengumuman" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-18 border-b border-slate-100">
     <div class="max-w-7xl mx-auto">
         
         <!-- Header Section -->
         <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-3">
-            <div>
-                <span class="text-xs font-bold text-purple-600 uppercase tracking-widest block mb-1">Informasi Resmi</span>
-                <h2 class="text-2xl font-extrabold text-slate-800 tracking-tight">Pengumuman Sekolah</h2>
-            </div>
+            <h2 class="text-2xl font-extrabold text-slate-800 tracking-tight">
+                <span class="w-1.5 h-5 bg-yellow-600 rounded-full mr-2.5 inline-block"></span>    
+                Pengumuman Sekolah
+            </h2>
             <a href="{{ route('front.announcements.index') }}" class="text-xs font-bold text-purple-600 hover:text-purple-700 flex items-center gap-1 transition group">
                 Lihat Semua Pengumuman 
                 <span class="transform group-hover:translate-x-1 transition-transform">→</span>
@@ -211,10 +211,16 @@
 
 <!-- News Grid Section -->
 <section id="berita" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-18">
-    <h2 class="text-lg font-extrabold text-slate-900 mb-8 flex items-center">
-        <span class="w-1.5 h-5 bg-blue-600 rounded-full mr-2.5 inline-block"></span>
-        Kabar Terbaru Sekolah
-    </h2>
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-3">
+        <h2 class="text-2xl font-extrabold text-slate-800 tracking-tight">
+            <span class="w-1.5 h-5 bg-blue-600 rounded-full mr-2.5 inline-block"></span>
+            Kabar Terbaru Sekolah
+        </h2>
+        <a href="{{ route('front.posts.index') }}" class="text-xs font-bold text-purple-600 hover:text-purple-700 flex items-center gap-1 transition group">
+            Lihat Semua Berita 
+            <span class="transform group-hover:translate-x-1 transition-transform">→</span>
+        </a>
+    </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @forelse($posts as $post)
@@ -237,7 +243,7 @@
                         <span class="text-slate-400">{{ $post->created_at->format('d M Y') }}</span>
                     </div>
                     <h3 class="font-bold text-slate-800 text-sm sm:text-base line-clamp-2 hover:text-blue-600 transition">
-                        <a href="{{ route('home.posts.show', $post->slug) }}">{{ $post->title }}</a>
+                        <a href="{{ route('front.posts.show-post', $post->slug) }}">{{ $post->title }}</a>
                     </h3>
                     <p class="text-xs text-slate-500 line-clamp-3 leading-relaxed">
                         {{ strip_tags($post->content) }}
@@ -246,7 +252,7 @@
 
                 <div class="pt-4 mt-4 border-t border-slate-50 flex items-center justify-between">
                     <span class="text-[10px] font-semibold text-slate-400">Penulis: {{ $post->user->name }}</span>
-                    <a href="{{ route('home.posts.show', $post->slug) }}" class="text-[11px] font-bold text-blue-600 hover:text-blue-700">Baca Selengkapnya &rarr;</a>
+                    <a href="{{ route('front.posts.show-post', $post->slug) }}" class="text-[11px] font-bold text-blue-600 hover:text-blue-700">Baca Selengkapnya &rarr;</a>
                 </div>
             </div>
         </div>

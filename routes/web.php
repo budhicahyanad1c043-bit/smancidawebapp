@@ -14,6 +14,7 @@ use App\Http\Controllers\ExtracurricularController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\FrontAnnouncementController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\FrontPostController;
 
 // Route::get('/', function () {
 //     return view('landing');
@@ -21,7 +22,14 @@ use App\Http\Controllers\GalleryController;
 
 // Rute Halaman Depan Publik
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/berita/{post:slug}', [HomeController::class, 'show'])->name('home.posts.show');
+
+// Rute untuk melihat semua artikel/berita
+Route::get('/berita', [FrontPostController::class, 'index'])->name('front.posts.index');
+
+// Rute untuk melihat detail artikel/berita berdasarkan slug
+Route::get('/berita/{slug}', [FrontPostController::class, 'show'])->name('front.posts.show-post');
+
+// Route::get('/berita/{post:slug}', [HomeController::class, 'show'])->name('home.posts.show');
 
 // Rute untuk melihat index semua pengumuman
 Route::get('/pengumuman', [FrontAnnouncementController::class, 'index'])->name('front.announcements.index');
@@ -77,6 +85,8 @@ Route::middleware(['auth'])->prefix('dashboard')->name('dashboard.')->group(func
 Route::resource('extracurriculars', ExtracurricularController::class);
 });
 
+
+// untuk di dashboard
 Route::middleware(['auth'])->prefix('dashboard')->name('dashboard.')->group(function () {
     // Route resource otomatis akan membuat nama route: dashboard.posts.update, dashboard.posts.index, dll.
     Route::resource('posts', PostController::class);

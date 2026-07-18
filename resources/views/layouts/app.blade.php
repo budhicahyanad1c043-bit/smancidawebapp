@@ -26,7 +26,7 @@
                         <span class="font-bold text-slate-800 text-sm md:text-base tracking-tight block">
                             {{ $setting->school_name ?? 'Nama Sekolah Anda' }}
                         </span>
-                        <span class="text-[9px] md:text-[10px] text-slate-400 font-medium block -mt-1 tracking-tight">
+                        <span class="text-[8px] md:text-[11px] text-slate-400 font-medium block -mt-1 tracking-tight">
                             {{ $setting->vision ?? 'Belum ditentukan' }}
                         </span>
                         

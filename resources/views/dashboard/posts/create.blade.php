@@ -12,7 +12,7 @@
     </div>
 
     <!-- Perhatikan Route diarahkan ke '.store' untuk penyimpanan data baru -->
-    <form action="{{ route('dashboard.posts.store') }}" method="POST" enctype="multipart/form-data" class="bg-white border border-slate-200 rounded-xl shadow-sm p-6 space-y-5">
+    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data" class="bg-white border border-slate-200 rounded-xl shadow-sm p-6 space-y-5">
         @csrf
 
         <!-- Judul Artikel -->
@@ -110,7 +110,7 @@
 
         <!-- Tombol Aksi -->
         <div class="flex justify-end space-x-3 pt-4 border-t border-slate-100">
-            <a href="{{ route('dashboard.posts.index') }}" class="px-4 py-2 text-xs font-bold text-slate-500 hover:bg-slate-50 rounded-lg transition">
+            <a href="{{ route('posts.index') }}" class="px-4 py-2 text-xs font-bold text-slate-500 hover:bg-slate-50 rounded-lg transition">
                 Batal
             </a>
             <button type="submit" class="px-5 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition">

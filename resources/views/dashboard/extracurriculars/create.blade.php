@@ -11,7 +11,7 @@
 
     <div class="bg-white border border-slate-200/60 rounded-xl shadow-sm p-6">
 
-        <form action="{{ route('dashboard.extracurriculars.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
+        <form action="{{ route('extracurriculars.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
             @csrf
 
             <!-- Nama Ekskul -->
@@ -51,7 +51,7 @@
 
             <!-- Tombol Aksi -->
             <div class="flex justify-end space-x-3 pt-4 border-t border-slate-100">
-                <a href="{{ route('dashboard.extracurriculars.index') }}" class="px-4 py-2 text-xs font-bold text-slate-500 hover:bg-slate-50 rounded-lg transition">Batal</a>
+                <a href="{{ route('extracurriculars.index') }}" class="px-4 py-2 text-xs font-bold text-slate-500 hover:bg-slate-50 rounded-lg transition">Batal</a>
                 <button type="submit" class="px-4 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition">Simpan Ekskul</button>
             </div>
         </form>

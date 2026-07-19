@@ -12,7 +12,7 @@ class SettingController extends Controller
     public function index()
     {
         $setting = Setting::first();
-        return view('dashboard.settings', compact('setting'));
+        return view('dashboard.settings.index', compact('setting'));
     }
 
     // Memproses pembaruan data dan upload gambar ke storage

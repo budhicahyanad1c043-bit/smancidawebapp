@@ -25,7 +25,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|max:255',
+            'title' => 'required|max:255|unique:posts,title',
             'content' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'status' => 'required|in:draft,published',
@@ -49,7 +49,7 @@ class PostController extends Controller
             'category_id' => $request->category_id,
         ]);
 
-        return redirect()->route('dashboard.posts.index')->with('success', 'Berita berhasil diterbitkan!');
+        return redirect()->route('posts.index')->with('success', 'Berita berhasil diterbitkan!');
     }
 
     public function edit(Post $post)
@@ -85,7 +85,7 @@ class PostController extends Controller
             'youtube_link' => $request->youtube_link,
         ]);
 
-        return redirect()->route('dashboard.posts.index')->with('success', 'Berita berhasil diperbarui!');
+        return redirect()->route('posts.index')->with('success', 'Berita berhasil diperbarui!');
     }
 
     public function destroy(Post $post)
@@ -95,6 +95,6 @@ class PostController extends Controller
         }
         $post->delete();
 
-        return redirect()->route('dashboard.posts.index')->with('success', 'Berita berhasil dihapus!');
+        return redirect()->route('posts.index')->with('success', 'Berita berhasil dihapus!');
     }
 }

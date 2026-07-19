@@ -8,7 +8,7 @@
             <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wider">Manajemen Ekstrakurikuler</h2>
             <p class="text-[11px] text-slate-500 mt-1">Kelola daftar kegiatan ekstrakurikuler yang aktif di sekolah.</p>
         </div>
-        <a href="{{ route('dashboard.extracurriculars.create') }}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-bold shadow-sm shadow-blue-500/20 hover:bg-blue-700 transition">
+        <a href="{{ route('extracurriculars.create') }}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-bold shadow-sm shadow-blue-500/20 hover:bg-blue-700 transition">
             <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path></svg>
             Tambah Ekskul
         </a>
@@ -65,11 +65,11 @@
                         <td class="py-3 px-4 text-center">
                             <div class="flex items-center justify-center space-x-2">
                                 <!-- Tombol Edit -->
-                                <a href="{{ route('dashboard.extracurriculars.edit', $ekskul->id) }}" class="p-1.5 text-blue-600 hover:bg-blue-50 border border-slate-200 rounded-md transition" title="Edit">
+                                <a href="{{ route('extracurriculars.edit', $ekskul->id) }}" class="p-1.5 text-blue-600 hover:bg-blue-50 border border-slate-200 rounded-md transition" title="Edit">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path></svg>
                                 </a>
                                 <!-- Tombol Hapus Form -->
-                                <form action="{{ route('dashboard.extracurriculars.destroy', $ekskul->id) }}" method="POST" class="delete-form">
+                                <form action="{{ route('extracurriculars.destroy', $ekskul->id) }}" method="POST" class="delete-form">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="p-1.5 text-rose-600 hover:bg-rose-50 border border-rose-100 rounded-md transition btn-delete" title="Hapus">

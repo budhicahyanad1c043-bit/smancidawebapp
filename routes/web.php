@@ -16,9 +16,6 @@ use App\Http\Controllers\FrontAnnouncementController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\FrontPostController;
 
-// Route::get('/', function () {
-//     return view('landing');
-// });
 
 // Rute Halaman Depan Publik
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -28,8 +25,6 @@ Route::get('/berita', [FrontPostController::class, 'index'])->name('front.posts.
 
 // Rute untuk melihat detail artikel/berita berdasarkan slug
 Route::get('/berita/{slug}', [FrontPostController::class, 'show'])->name('front.posts.show-post');
-
-// Route::get('/berita/{post:slug}', [HomeController::class, 'show'])->name('home.posts.show');
 
 // Rute untuk melihat index semua pengumuman
 Route::get('/pengumuman', [FrontAnnouncementController::class, 'index'])->name('front.announcements.index');
@@ -43,54 +38,32 @@ Route::post('/login', [LoginController::class, 'login'])->middleware('guest');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-// Rute yang WAJIB Login (Multiuser)
-Route::middleware(['auth'])->group(function () {
+    
+Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     
     // Halaman Dasbor Utama (Bisa diakses Admin & Web-Journalist)
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-    // Rute Pengelolaan User & Setting Website
-    Route::get('/dashboard/users', [DashboardController::class, 'users'])->name('dashboard.users.main');
-    // Pindahkan rute setting ke SettingController baru Anda di sini:
-    Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
-    Route::post('settings', [SettingController::class, 'update'])->name('settings.update');
-
-    // Route manajemen user CRUD yang kita buat sebelumnya
-    // Route::resource('users', UserController::class)->except(['create', 'edit', 'show']);
-    
-    });
-    
-    Route::middleware(['auth'])->prefix('dashboard')->group(function () {
-        // Rute bawaan resource mencakup index, create, store, edit, update, destroy
-        // Route::resource('posts', PostController::class);
-        // Fitur yang BISA diakses ADMIN maupun GURU
-        Route::resource('categories', CategoryController::class);
-        
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::resource('announcements', AnnouncementController::class);
-        Route::resource('galleries', GalleryController::class);
-        
-// Fitur yang HANYA BISA diakses oleh ADMIN saja
-Route::middleware(['role:admin'])->group(function () {
-    Route::resource('users', UserController::class); // CRUD Manajemen User (Daftarin akun Guru baru)
-    Route::get('/settings', [HomeController::class, 'settingsEdit']); // Edit settingan sekolah
-});
-
-});
-
-Route::middleware(['auth'])->prefix('dashboard')->name('dashboard.')->group(function () {
-// Route resource otomatis mencakup index, create, store, edit, update, destroy
-Route::resource('extracurriculars', ExtracurricularController::class);
-});
-
-
-// untuk di dashboard
-Route::middleware(['auth'])->prefix('dashboard')->name('dashboard.')->group(function () {
-    // Route resource otomatis akan membuat nama route: dashboard.posts.update, dashboard.posts.index, dll.
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+            
+    // Fitur yang BISA diakses ADMIN maupun GURU
+    Route::resource('categories', CategoryController::class);    
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::resource('announcements', AnnouncementController::class);
+    Route::resource('galleries', GalleryController::class);
+    Route::resource('extracurriculars', ExtracurricularController::class);
     Route::resource('posts', PostController::class);
     
+    // Fitur yang HANYA BISA diakses oleh ADMIN saja!
+    Route::middleware(['role:admin'])->group(function () {
+        // untuk mengakses menu kelola user
+        Route::get('users', [UserController::class, 'users'])->name('users.index');
+        Route::resource('users', UserController::class); // CRUD Manajemen User (Daftarin akun Guru baru)
+
+        // Untuk mengakses menu settings
+        Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+        Route::post('/settings/update', [SettingController::class, 'update'])->name('settings.update');
+    });
+
 });
 
     

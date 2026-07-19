@@ -43,7 +43,7 @@ class ExtracurricularController extends Controller
 
         Extracurricular::create($data);
 
-        return redirect()->route('dashboard.extracurriculars.index')->with('success', 'Ekstrakurikuler berhasil ditambahkan!');
+        return redirect()->route('extracurriculars.index')->with('success', 'Ekstrakurikuler berhasil ditambahkan!');
     }
 
     public function edit(Extracurricular $extracurricular)
@@ -74,7 +74,7 @@ class ExtracurricularController extends Controller
 
         $extracurricular->update($data);
 
-        return redirect()->route('dashboard.extracurriculars.index')->with('success', 'Ekstrakurikuler berhasil diperbarui!');
+        return redirect()->route('extracurriculars.index')->with('success', 'Ekstrakurikuler berhasil diperbarui!');
     }
 
     public function destroy(Extracurricular $extracurricular)

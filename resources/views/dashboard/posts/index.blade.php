@@ -10,7 +10,7 @@
             <h1 class="text-xl font-bold text-slate-800 tracking-tight">Artikel & Berita</h1>
             <p class="text-xs text-slate-500">Kelola konten berita yang akan tampil di website publik sekolah.</p>
         </div>
-        <a href="{{ route('dashboard.posts.create') }}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-bold shadow-sm shadow-blue-500/20 hover:bg-blue-700 transition">
+        <a href="{{ route('posts.create') }}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-bold shadow-sm shadow-blue-500/20 hover:bg-blue-700 transition">
             <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path></svg>
             Tulis Artikel
         </a>
@@ -62,10 +62,10 @@
                         </td>
                         <td class="px-6 py-4 text-center">
                             <div class="flex items-center justify-center space-x-2">
-                                <a href="{{ route('dashboard.posts.edit', $post->id) }}" class="p-1.5 bg-slate-50 border border-slate-200 rounded-md hover:bg-slate-100 text-slate-600 transition" title="Edit">
+                                <a href="{{ route('posts.edit', $post->id) }}" class="p-1.5 bg-slate-50 border border-slate-200 rounded-md hover:bg-slate-100 text-slate-600 transition" title="Edit">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path></svg>
                                 </a>
-                                <form action="{{ route('dashboard.posts.destroy', $post->id) }}" method="POST" class="delete-form-post">
+                                <form action="{{ route('posts.destroy', $post->id) }}" method="POST" class="delete-form-post">
                                     @csrf 
                                     @method('DELETE')
                                     <button type="button" class="p-1.5 bg-rose-50 border border-rose-100 rounded-md btn-delete-post hover:bg-rose-100 text-rose-600 transition" title="Hapus">

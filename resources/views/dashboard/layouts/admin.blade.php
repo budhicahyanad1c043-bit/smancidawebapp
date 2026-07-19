@@ -71,21 +71,29 @@
 
             <!-- Menu Isi Sidebar -->
             <div class="flex-1 overflow-y-auto px-3 py-4 space-y-6">
+
+                <!-- Dashboard -->
                 <div>
                     <p x-show="!sidebarCollapsed" class="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2">Menu Utama</p>
-                    <a href="{{ url('/dashboard') }}" class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ Request::is('dashboard') && !Request::is('dashboard/users*') && !Request::is('dashboard/settings*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}" :class="sidebarCollapsed ? 'md:justify-center' : ''">
+
+                    <a href="{{ route('dashboard.index') }}" class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ Request::is('dashboard') && !Request::is('dashboard/users*') && !Request::is('dashboard/settings*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}" :class="sidebarCollapsed ? 'md:justify-center' : ''">
                         <svg class="w-4 h-4 flex-shrink-0" :class="sidebarCollapsed ? 'md:mr-0' : 'mr-3'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"></path></svg>
                         <span x-show="!sidebarCollapsed">Dashboard</span>
                     </a>
                 </div>
+
+                <!-- Manajemen -->
                 <div>
                     <p x-show="!sidebarCollapsed" class="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2">Manajemen</p>
+                    
                     <div class="space-y-1">
-                        <a href="{{ route('users.index') }}" class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ Request::is('users*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}" :class="sidebarCollapsed ? 'md:justify-center' : ''">
-                            <svg class="w-4 h-4 flex-shrink-0" :class="sidebarCollapsed ? 'md:mr-0' : 'mr-3'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        <a href="{{ route('users.index') }}" class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ request()->routeIs('users*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}" :class="sidebarCollapsed ? 'md:justify-center' : ''">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0" :class="sidebarCollapsed ? 'md:mr-0' : 'mr-3'" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                            </svg>
                             <span x-show="!sidebarCollapsed">Kelola Pengguna</span>
                         </a>
-                        <a href="{{ route('settings.index') }}" class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ Request::is('settings*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}" :class="sidebarCollapsed ? 'md:justify-center' : ''">
+                        <a href="{{ route('settings.index') }}" class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ request()->routeIs('settings*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}" :class="sidebarCollapsed ? 'md:justify-center' : ''">
                             <svg class="w-4 h-4 flex-shrink-0" :class="sidebarCollapsed ? 'md:mr-0' : 'mr-3'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                             <span x-show="!sidebarCollapsed">Pengaturan Web</span>
                         </a>
@@ -93,16 +101,16 @@
                     </div>
                 </div>
 
-                <!-- Kategori Baru: Konten Website -->
+                <!-- Konten Website -->
                 <div>
                     <p x-show="!sidebarCollapsed" class="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2">Konten Publik</p>
                     <div class="space-y-1">
                         <!-- Menu Artikel / Berita -->
-                        <a href="{{ route('dashboard.posts.index') }}" 
-                        class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ request()->routeIs('dashboard.posts.*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}" 
+                        <a href="{{ route('posts.index') }}" 
+                        class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ request()->routeIs('posts*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}" 
                         :class="sidebarCollapsed ? 'md:justify-center' : ''">
                             <svg class="w-4 h-4 flex-shrink-0" :class="sidebarCollapsed ? 'md:mr-0' : 'mr-3'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                             </svg>
                             <span x-show="!sidebarCollapsed">Artikel & Berita</span>
                         </a>
@@ -145,12 +153,13 @@
                     </div>
                 </div>
 
+                <!-- Ekskul -->
                 <div>
                     <p x-show="!sidebarCollapsed" class="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2">Manajemen Ekskul</p>
                     <div class="space-y-1">
                         <!-- Ekstrakurikuler -->
-                        <a href="{{ route('dashboard.extracurriculars.index') }}" 
-                        class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ request()->routeIs('dashboard.extracurriculars.*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}" 
+                        <a href="{{ route('extracurriculars.index') }}" 
+                        class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ request()->routeIs('extracurriculars*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}" 
                         :class="sidebarCollapsed ? 'md:justify-center' : ''">
                             <svg class="w-4 h-4 flex-shrink-0" :class="sidebarCollapsed ? 'md:mr-0' : 'mr-3'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 0 0 5.304 0l6.401-6.402M6.75 21A3.75 3.75 0 0 1 3 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 0 0 3.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008Z" />
@@ -160,6 +169,7 @@
                         </a>
                     </div>
                 </div>
+
 
                 <div>
                     <div class="space-y-1">

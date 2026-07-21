@@ -32,7 +32,7 @@
                     @endif
                 </div>
                 <h2 class="text-xl font-black text-slate-800 tracking-tight">Selamat Datang</h2>
-                <p class="text-xs text-slate-500 mt-1">Silakan masuk ke sistem admin {{ $setting->school_name ?? 'SMAN 1 Cidahu' }}</p>
+                <p class="text-xs text-slate-500 mt-1">Silakan masuk ke sistem admin {{ $setting->school_name ?? 'Belum di setting' }}</p>
             </div>
 
             <!-- TAMPILAN ERROR VALIDASI LARAVEL -->

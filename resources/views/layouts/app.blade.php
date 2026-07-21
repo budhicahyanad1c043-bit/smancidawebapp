@@ -7,6 +7,17 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- Tambahkan CDN SweetAlert2 jika ingin menggunakannya global -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+        /* Memaksa mobile menu sembunyi total sebelum CSS Tailwind selesai dieksekusi */
+        #mobile-menu {
+            display: none !important;
+        }
+        /* Saat tombol diklik dan JS menambahkan kelas .is-active, menu baru boleh tampil */
+        #mobile-menu.is-active {
+            display: block !important;
+        }
+    </style>
 </head>
 <body class="bg-slate-50 antialiased">
 
@@ -79,7 +90,7 @@
         </div>
 
         <!-- Menu Navigasi Dropdown (HANYA MUNCUL DI MOBILE SAAT DIKLIK) -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-1 shadow-inner">
+        <div id="mobile-menu" style="display: none;" class="hidden md:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-1 shadow-inner">
 
             <a href="/" class="nav-link block text-xs font-bold py-2.5 px-3 rounded-lg {{ request()->routeIs('home') ? 'text-blue-600 bg-blue-50/50 ' : 'text-slate-600 hover:text-blue-600' }}">Beranda</a>
 
@@ -140,12 +151,16 @@
 
             if (menuBtn && mobileMenu) {
                 menuBtn.addEventListener('click', function () {
-                    // Toggle kelas hidden untuk membuka/menutup menu
-                    mobileMenu.classList.toggle('hidden');
+                    // 🌟 Buka/tutup menu dengan toggle class .is-active
+                    const isOpen = mobileMenu.classList.toggle('is-active');
                     
-                    // Toggle icon burger dan icon close (X)
-                    hamburgerIcon.classList.toggle('hidden');
-                    closeIcon.classList.toggle('hidden');
+                    if (isOpen) {
+                        hamburgerIcon.classList.add('hidden');
+                        closeIcon.classList.remove('hidden');
+                    } else {
+                        hamburgerIcon.classList.remove('hidden');
+                        closeIcon.classList.add('hidden');
+                    }
                 });
 
                 // Tutup menu otomatis jika salah satu link di dalam menu mobile diklik

@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') - {{ $setting->school_name ?? 'SMAN 1 Cidahu' }}</title>
+    <!-- 🌟 1. CSS KRITIS: Mencegah kedipan sidebar & Alpine sebelum JS dimuat sepenuhnya -->
+    <style>
+        [x-cloak] { display: none !important; }
+
+        @media (max-width: 767px) {
+            /* Sebelum Alpine.js siap, sembunyikan sidebar mobile */
+            aside:not([x-init]):not([class*="translate-x-0"]) {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
@@ -46,7 +57,7 @@
         <!-- ========================================================= -->
         <!-- 1. SIDEBAR NAVIGASI (Z-INDEX 40)                          -->
         <!-- ========================================================= -->
-        <aside class="fixed inset-y-0 left-0 z-40 bg-slate-900 text-slate-400 transition-all duration-300 flex flex-col shadow-xl md:translate-x-0"
+        <aside class="sidebar-mobile-hidden fixed fixed inset-y-0 left-0 z-40 bg-slate-900 text-slate-400 transition-all duration-300 flex flex-col shadow-xl -translate-x-full md:translate-x-0"
                :class="{
                    'translate-x-0': openMobileSidebar, 
                    '-translate-x-full': !openMobileSidebar,

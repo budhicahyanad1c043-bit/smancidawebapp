@@ -37,10 +37,12 @@ class SettingController extends Controller
             'welcome_message'    => 'nullable',
             'description_school' => 'nullable',
             'npsn'               => 'nullable|string',
+            'is_maintenance'     => 'nullable|boolean',
         ]);
 
         // Ambil semua inputan kecuali file gambar
         $data = $request->except(['logo', 'principal_photo']);
+        $data['is_maintenance'] = $request->has('is_maintenance') ? 1 : 0;
 
         // 1. Proses Upload File Logo Sekolah asli ke Storage
         if ($request->hasFile('logo')) {

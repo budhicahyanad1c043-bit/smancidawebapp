@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('website')->nullable();
             $table->text('welcome_message')->nullable();
             $table->text('description_school')->nullable();
-            $table->string('npsn')->nullable();    
+            $table->string('npsn')->nullable();   
             $table->timestamps();
         });
     }

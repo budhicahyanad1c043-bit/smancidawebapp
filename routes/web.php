@@ -15,6 +15,7 @@ use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\FrontAnnouncementController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\FrontPostController;
+use App\Http\Controllers\MenuController;
 
 
 // Rute Halaman Depan Publik
@@ -52,13 +53,17 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::resource('galleries', GalleryController::class);
     Route::resource('extracurriculars', ExtracurricularController::class);
     Route::resource('posts', PostController::class);
+
     
     // Fitur yang HANYA BISA diakses oleh ADMIN saja!
     Route::middleware(['role:admin'])->group(function () {
         // untuk mengakses menu kelola user
         Route::get('users', [UserController::class, 'users'])->name('users.index');
         Route::resource('users', UserController::class); // CRUD Manajemen User (Daftarin akun Guru baru)
-
+        
+        // Route Manajemen Menu Dinamis
+        Route::resource('menus', MenuController::class)->except(['create', 'edit', 'show']);
+        
         // Untuk mengakses menu settings
         Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
         Route::post('/settings/update', [SettingController::class, 'update'])->name('settings.update');

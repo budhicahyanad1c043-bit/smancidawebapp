@@ -104,9 +104,18 @@
                             </svg>
                             <span x-show="!sidebarCollapsed">Kelola Pengguna</span>
                         </a>
+                        
                         <a href="{{ route('settings.index') }}" class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ request()->routeIs('settings*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}" :class="sidebarCollapsed ? 'md:justify-center' : ''">
                             <svg class="w-4 h-4 flex-shrink-0" :class="sidebarCollapsed ? 'md:mr-0' : 'mr-3'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                             <span x-show="!sidebarCollapsed">Pengaturan Web</span>
+                        </a>
+
+                        <a href="{{ route('menus.index') }}" class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ request()->routeIs('menus*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}" :class="sidebarCollapsed ? 'md:justify-center' : ''">
+                            <svg class="w-4 h-4 flex-shrink-0" :class="sidebarCollapsed ? 'md:mr-0' : 'mr-3'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+                            </svg>
+
+                            <span x-show="!sidebarCollapsed">Kelola Menu Topbar</span>
                         </a>
                         
                     </div>
@@ -139,8 +148,8 @@
 
                         <!-- MENU GALERI -->
                         <a href="{{ route('galleries.index') }}" 
-                        class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition 
-                        {{ request()->routeIs('galleries.*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}">
+                        class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ request()->routeIs('galleries.*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}" 
+                        :class="sidebarCollapsed ? 'md:justify-center' : ''">
                             <svg class="w-4 h-4 flex-shrink-0" :class="sidebarCollapsed ? 'md:mr-0' : 'mr-3'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                             </svg>
@@ -149,10 +158,8 @@
 
                         <!-- MENU PENGUMUMAN (SIDEBAR ITEM) -->
                         <a href="{{ route('announcements.index') }}" 
-                        class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition 
-                        {{ request()->routeIs('announcements.*') 
-                            ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' 
-                            : 'hover:bg-slate-800 hover:text-white' }}">
+                        class="flex items-center px-3 py-2 rounded-lg text-xs font-medium transition {{ request()->routeIs('announcements.*') ? 'bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/10' : 'hover:bg-slate-800 hover:text-white' }}" 
+                        :class="sidebarCollapsed ? 'md:justify-center' : ''">
                             
                             <!-- Icon Speaker/Megaphone -->
                             <svg class="w-4 h-4 flex-shrink-0" :class="sidebarCollapsed ? 'md:mr-0' : 'mr-3'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

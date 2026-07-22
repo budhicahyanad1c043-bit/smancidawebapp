@@ -1,9 +1,9 @@
 @extends('dashboard.layouts.admin') {{-- Sesuaikan dengan nama layout admin Anda --}}
 @section('title', 'Manajemen Menu')
 @section('content')
-<div class="p-6 bg-slate-50 min-h-screen">
+<div class="space-y-6">
     <!-- Header -->
-    <div class="flex justify-between items-center mb-6">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
             <h1 class="text-xl font-bold text-slate-800">Manajemen Menu Dinamis</h1>
             <p class="text-xs text-slate-500">Kelola susunan menu topbar dan sidebar aplikasi</p>
@@ -15,8 +15,8 @@
     </div>
 
     <!-- Tabel Daftar Menu -->
-    <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
-        <table class="w-full text-left text-xs text-slate-600">
+    <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-x-auto w-full [-webkit-overflow-scrolling:touch]">
+    <table class="w-full min-w-[650px] text-left text-xs text-slate-600">
             <thead class="bg-slate-50 border-b border-slate-100 text-slate-700 uppercase font-semibold">
                 <tr>
                     <th class="p-3">Urutan</th>

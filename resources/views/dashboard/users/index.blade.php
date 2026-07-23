@@ -44,7 +44,7 @@
                 </div>
             </form>
 
-            <button @click="openAdd = true" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-lg text-xs transition flex items-center space-x-1.5 shadow-sm shadow-blue-500/10">
+            <button @click="openAdd = true" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-lg text-xs transition flex items-center space-x-1.5 shadow-sm shadow-blue-500/10 cursor-pointer">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
                 </svg>
@@ -101,7 +101,7 @@
                                                 editData = { id: '{{ $user->id }}', name: '{{ $user->name }}', username: '{{ $user->username }}', email: '{{ $user->email }}', role: '{{ $user->role }}' };
                                                 openEdit = true;
                                             " 
-                                            class="p-1.5 bg-white hover:bg-slate-50 border border-slate-200 rounded-md text-slate-600 transition" title="Ubah User">
+                                            class="p-1.5 bg-white hover:bg-slate-50 border border-slate-200 rounded-md text-slate-600 transition cursor-pointer" title="Ubah User">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2.5 2.5 0 113.536 3.536L12 14.586l-4 1 1-4 9.414-9.414z"></path>
                                         </svg>
@@ -113,7 +113,7 @@
                                                     deleteUrl = '{{ route('users.index') }}' + '/' + '{{ $user->id }}';
                                                     openDelete = true;
                                                 " 
-                                                class="p-1.5 bg-white hover:bg-red-50 border border-slate-200 hover:border-red-200 rounded-md text-red-600 transition" title="Hapus User">
+                                                class="p-1.5 bg-white hover:bg-red-50 border border-slate-200 hover:border-red-200 rounded-md text-red-600 transition cursor-pointer" title="Hapus User">
                                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                             </svg>
@@ -179,8 +179,8 @@
                     </select>
                 </div>
                 <div class="flex justify-end space-x-2 pt-3 border-t border-slate-200 mt-4">
-                    <button type="button" @click="openAdd = false" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-semibold transition cursor:pointer">Batal</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold transition">Simpan Data</button>
+                    <button type="button" @click="openAdd = false" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-semibold transition cursor-pointer">Batal</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold transition cursor-pointer">Simpan Data</button>
                 </div>
             </form>
         </div>
@@ -217,8 +217,8 @@
                     </select>
                 </div>
                 <div class="flex justify-end space-x-2 pt-3 border-t border-slate-100 mt-4">
-                    <button type="button" @click="openEdit = false" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-semibold transition">Batal</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold transition">Perbarui Data</button>
+                    <button type="button" @click="openEdit = false" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-semibold transition cursor-pointer">Batal</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold transition cursor-pointer">Perbarui Data</button>
                 </div>
             </form>
         </div>

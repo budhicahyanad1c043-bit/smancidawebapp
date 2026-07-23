@@ -13,6 +13,14 @@
     </style>
 </head>
 <body class="bg-slate-50 antialiased">
+    <!-- 🌟 ANIMASI PAGE LOADER HALUS (SAAT DIBUKA) -->
+    <div id="page-loader" class="fixed inset-0 z-[9999] bg-white flex flex-col items-center justify-center transition-opacity duration-300">
+        <div class="relative flex items-center justify-center">
+            <div class="w-12 h-12 rounded-full border-4 border-blue-100 border-t-blue-600 animate-spin"></div>
+            <div class="absolute text-xs">🔐</div>
+        </div>
+        <p class="mt-3 text-xs font-semibold text-slate-500 animate-pulse">Memuat halaman login...</p>
+    </div>
 
     <div class="min-h-screen flex items-center justify-center px-4 py-12" 
          x-data="{ showPassword: false }">
@@ -50,7 +58,7 @@
             @endif
 
             <!-- FORM LOGIN -->
-            <form action="{{ route('login') }}" method="POST" class="space-y-4">
+            <form action="{{ route('login') }}" method="POST" id="loginForm" class="space-y-4">
                 @csrf
 
                 <!-- Input Username / Email -->
@@ -110,17 +118,73 @@
 
                 <!-- Tombol Submit -->
                 <div class="pt-2">
-                    <button type="submit" 
-                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-4 rounded-lg text-xs transition shadow-md shadow-blue-500/10 flex items-center justify-center space-x-2">
-                        <span>Masuk ke Dashboard</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M11 16l4-4m0 0l-4-4m4 4H3m13-4V7a3 3 0 00-3-3H6a3 3 0 00-3 3v10a3 3 0 003 3h7a3 3 0 003-3v-4"></path>
+                    <!-- 🌟 TOMBOL SUBMIT DENGAN ANIMASI LOADING SPINNER -->
+                    <button type="submit" id="btnLogin" 
+                            class="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs transition duration-200 shadow-lg shadow-blue-500/25 flex items-center justify-center space-x-2">
+                        <span id="btnLoginText">Masuk Ke Akun</span>
+                        
+                        <!-- Spinner Icon (Pastikan class 'animate-spin' & 'hidden' diatur dengan benar) -->
+                        <svg id="btnLoginSpinner" class="hidden w-4 h-4 animate-spin text-white" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
                     </button>
+                    
                 </div>
             </form>
         </div>
     </div>
+
+    <!-- Script Kontrol Submit & Loading -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loader = document.getElementById('page-loader');
+            
+            function hideLoader() {
+                if (loader && !loader.classList.contains('hidden')) {
+                    loader.classList.add('opacity-0', 'pointer-events-none');
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                        loader.classList.add('hidden');
+                    }, 300);
+                }
+            }
+
+            // 1. Sembunyikan begitu struktur DOM/HTML siap (Cepat & Handal)
+            hideLoader();
+
+            // 2. Sembunyikan saat window load selesai
+            window.addEventListener('load', hideLoader);
+
+            // 3. Fallback Cadangan: Maksimal 1.5 detik loader PASTI hilang (Mencegah Stuck)
+            setTimeout(hideLoader, 1500);
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const loginForm = document.getElementById('loginForm');
+            const btnLogin = document.getElementById('btnLogin');
+            const btnText = document.getElementById('btnLoginText');
+            const btnSpinner = document.getElementById('btnLoginSpinner');
+
+            if (loginForm) {
+                loginForm.addEventListener('submit', function (e) {
+                    // 1. Tampilkan Spinner dan Ubah Teks
+                    btnText.textContent = 'Memproses...';
+                    btnSpinner.classList.remove('hidden');
+
+                    // 2. Beri efek visual tombol tidak bisa di-hover
+                    btnLogin.classList.add('opacity-75', 'cursor-not-allowed', 'pointer-events-none');
+
+                    // 3. Matikan tombol sejenak menggunakan setTimeout agar submit native browser tidak terganggu
+                    setTimeout(function () {
+                        btnLogin.disabled = true;
+                    }, 10);
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>

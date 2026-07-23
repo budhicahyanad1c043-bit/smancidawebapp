@@ -178,8 +178,8 @@
                         <option value="admin">Admin</option>
                     </select>
                 </div>
-                <div class="flex justify-end space-x-2 pt-3 border-t border-slate-100 mt-4">
-                    <button type="button" @click="openAdd = false" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-semibold transition">Batal</button>
+                <div class="flex justify-end space-x-2 pt-3 border-t border-slate-200 mt-4">
+                    <button type="button" @click="openAdd = false" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-semibold transition cursor:pointer">Batal</button>
                     <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold transition">Simpan Data</button>
                 </div>
             </form>

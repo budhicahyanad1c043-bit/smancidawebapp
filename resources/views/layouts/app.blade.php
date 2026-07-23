@@ -16,7 +16,16 @@
 </head>
 <!-- Menginisialisasi State Mobile Menu di Body Menggunakan Alpine.js -->
 <body x-data="{ mobileMenuOpen: false }" class="bg-slate-50 antialiased font-sans text-slate-700">
-
+    <!-- 🌟 ANIMASI LOADING GLOBAL -->
+    <div id="page-loader" class="fixed inset-0 z-[9999] bg-white flex flex-col items-center justify-center transition-opacity duration-300">
+        <div class="relative flex items-center justify-center">
+            <!-- Spinner Ring -->
+            <div class="w-12 h-12 rounded-full border-4 border-blue-100 border-t-blue-600 animate-spin"></div>
+            <!-- Logo kecil di tengah spinner (Opsional) -->
+            <div class="absolute text-xs">🏫</div>
+        </div>
+        <p class="mt-3 text-xs font-semibold text-slate-500 animate-pulse">Memuat halaman...</p>
+    </div>
     <!-- Top Bar / Navbar Utama -->
     <nav class="bg-white/95 border-b border-slate-100 sticky top-0 z-40 shadow-sm backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -229,5 +238,17 @@
     </script>
     
     @stack('scripts')
+    <script>
+    // Sembunyikan loader saat seluruh aset halaman selesai dimuat
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('page-loader');
+            if (loader) {
+                loader.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 300);
+            }
+        });
+    </script>
 </body>
 </html>

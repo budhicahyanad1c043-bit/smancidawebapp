@@ -3,6 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content')
+
 <div class="space-y-6">
     <!-- Content Header (Page Header) -->
     <div class="flex items-center justify-between border-b border-slate-200 pb-4">

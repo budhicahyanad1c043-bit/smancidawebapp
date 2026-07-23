@@ -9,8 +9,11 @@
             <p class="text-xs text-slate-500">Kelola susunan menu topbar dan sidebar aplikasi</p>
         </div>
         <!-- Tombol Buka Modal Tambah -->
-        <button onclick="openAddModal()" class="px-4 py-2 bg-blue-600 text-white text-xs font-semibold rounded-lg hover:bg-blue-700 transition shadow-sm cursor-pointer">
-            + Tambah Menu
+        <button onclick="openAddModal()" class="px-4 py-2 bg-blue-600 text-white text-xs font-semibold rounded-lg hover:bg-blue-700 flex items-center justify-center space-x-1.5 transition shadow-sm cursor-pointer">
+           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+            </svg>
+            <span>Tambah Menu</span>
         </button>
     </div>
 

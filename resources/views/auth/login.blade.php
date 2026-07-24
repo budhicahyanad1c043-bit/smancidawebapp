@@ -65,7 +65,7 @@
                 <div>
                     <label class="block text-xs font-bold text-slate-600 mb-1">Username atau Email</label>
                     <div class="relative">
-                        <input type="text" name="username" value="{{ old('login') }}" required autofocus 
+                        <input type="text" id="login" name="login" value="{{ old('login') }}" required autofocus 
                                class="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-blue-500 transition @error('login') border-red-500 @enderror">
                         <span class="absolute left-3 top-2.5 text-slate-400">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

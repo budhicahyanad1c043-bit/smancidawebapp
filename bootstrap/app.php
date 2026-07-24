@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // Daftarkan alias middleware 'role' ke class CheckRole
         $middleware->alias([
             'role' => \App\Http\Middleware\CheckRole::class,
+            'active.user' => \App\Http\Middleware\CheckActiveUser::class,
         ]);
         $middleware->append(\App\Http\Middleware\CheckMaintenanceMode::class);
     })
@@ -23,3 +24,4 @@ return Application::configure(basePath: dirname(__DIR__))
             fn (Request $request) => $request->is('api/*'),
         );
     })->create();
+    

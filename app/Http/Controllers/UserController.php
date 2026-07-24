@@ -23,7 +23,7 @@ class UserController extends Controller
     }
 
     public function store(Request $request)
-{
+    {
     // 1. Simpan hasil validasi ke dalam variabel
     $validated = $request->validate([
         'name'     => 'required|string|max:255',
@@ -39,7 +39,7 @@ class UserController extends Controller
         // 3. Masukkan langsung semua data yang sudah valid
         User::create($validated);
 
-        return back()->with('success', 'Pengguna baru berhasil ditambahkan.');
+        return redirect()->route('users.index')->with('success', 'Pengguna baru berhasil ditambahkan.');
     }
 
     public function update(Request $request, User $user)
@@ -56,6 +56,10 @@ class UserController extends Controller
         $user->username = $request->username;
         $user->email = $request->email;
         $user->role = $request->role;
+        // $user->name = $validate['name'];
+        // $user->username = $validate['username'];
+        // $user->email = $validate['email'];
+        // $user->role = $validate['role'];
 
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
@@ -63,7 +67,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return back()->with('success', 'Data pengguna berhasil diperbarui.');
+        return redirect()->route('users.index')->with('success', 'Data pengguna berhasil diperbarui.');
     }
 
     public function destroy(User $user)
@@ -75,4 +79,19 @@ class UserController extends Controller
         $user->delete();
         return back()->with('success', 'Pengguna berhasil dihapus dari sistem.');
     }
+
+    public function toggleStatus(User $user)
+    {
+        // Mencegah admin menonaktifkan akunnya sendiri
+        if (auth()->id() === $user->id) {
+            return back()->with('error', 'Anda tidak dapat mengubah status akun Anda sendiri.');
+        }
+
+        $user->is_active = !$user->is_active;
+        $user->save();
+
+        return back()->with('success', 'Status pengguna berhasil diperbarui.');
+    }
+
+    
 }
